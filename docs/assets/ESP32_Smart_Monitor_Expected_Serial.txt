@@ -1,0 +1,16 @@
+ESP32_Smart_Monitor | Source-derived Serial Monitor example | 115200 baud
+ADC samples are illustrative and generated from the actual SensorHub conversion and EMA filter.
+No hardware capture was performed.
+
+[SmartMonitor] System ready
+ADC: 1.50 V | Avg: 1.50 V
+ADC: 1.55 V | Avg: 1.51 V
+ADC: 1.60 V | Avg: 1.52 V
+ADC: 1.68 V | Avg: 1.54 V
+ADC: 1.63 V | Avg: 1.56 V
+ADC: 1.72 V | Avg: 1.58 V
+ADC: 1.66 V | Avg: 1.59 V
+ADC: 1.58 V | Avg: 1.59 V
+ADC: 1.53 V | Avg: 1.58 V
+ADC: 1.63 V | Avg: 1.59 V
+ADC: 1.69 V | Avg: 1.60 V

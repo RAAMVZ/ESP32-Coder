@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="feed-page" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ESP32 Coder — удобная среда для Arduino IDE и PlatformIO | ESP32 Windows</title>
+<meta content="ESP32 Coder — самостоятельная среда для пользователей Arduino IDE и PlatformIO. Оффлайн-разработка ESP32 без VPN, турбокомпиляция, умный анализ зависимостей, импорт проектов и менеджер библиотек с поиском через Trema." name="description"/>
+<meta content="ESP32 Coder, ESP32 IDE Windows, ESP32 прошивка BIN, LittleFS прошивка, ESP32-S3 IDE, ESP32-C3 IDE, Arduino IDE альтернатива, ESP32 без PlatformIO, ESP32 Windows IDE" name="keywords"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<meta content="#080d16" name="theme-color"/>
+<link href="https://raamvz.github.io/ESP32-Coder-Releases/ru.html" rel="canonical"/>
+<link href="https://raamvz.github.io/ESP32-Coder-Releases/ru.html" hreflang="ru" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder-Releases/en.html" hreflang="en" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder-Releases/en.html" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="ESP32 Coder" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="en_US" property="og:locale:alternate"/>
+<meta content="ESP32 Coder — удобная среда для Arduino IDE и PlatformIO | ESP32 Windows" property="og:title"/>
+<meta content="ESP32 Coder — самостоятельная среда для пользователей Arduino IDE и PlatformIO. Оффлайн-разработка ESP32 без VPN, турбокомпиляция, умный анализ зависимостей, импорт проектов и менеджер библиотек с поиском через Trema." property="og:description"/>
+<meta content="https://raamvz.github.io/ESP32-Coder-Releases/ru.html" property="og:url"/>
+<meta content="https://raamvz.github.io/ESP32-Coder-Releases/assets/social-preview.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="ESP32 Coder — standalone ESP32 IDE for Windows" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ESP32 Coder — удобная среда для Arduino IDE и PlatformIO | ESP32 Windows" name="twitter:title"/>
+<meta content="ESP32 Coder — самостоятельная среда для пользователей Arduino IDE и PlatformIO. Оффлайн-разработка ESP32 без VPN, турбокомпиляция, умный анализ зависимостей, импорт проектов и менеджер библиотек с поиском через Trema." name="twitter:description"/>
+<meta content="https://raamvz.github.io/ESP32-Coder-Releases/assets/social-preview.png" name="twitter:image"/>
+<link href="assets/favicon.png" rel="icon" type="image/png"/>
+<link href="assets/esp32coder-icon.png" rel="apple-touch-icon"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="site-config.js"></script>
+<script defer="" src="app.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ESP32 Coder", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://raamvz.github.io/ESP32-Coder-Releases/ru.html", "image": "https://raamvz.github.io/ESP32-Coder-Releases/assets/social-preview.png", "description": "ESP32 Coder — самостоятельная среда для пользователей Arduino IDE и PlatformIO. Оффлайн-разработка ESP32 без VPN, турбокомпиляция, умный анализ зависимостей, импорт проектов и менеджер библиотек с поиском через Trema.", "featureList": ["Оффлайн-разработка после установки компонентов", "Редактор C/C++, компилятор, прошивальщик, монитор порта и плоттер", "Турбокомпиляция: несколько ядер CPU и кэш", "Автоматический анализ зависимостей и очистка библиотек", "Импорт проектов Arduino IDE и PlatformIO", "Поиск библиотек через зеркало Trema", "ESP32, ESP32-S2, ESP32-S3, ESP32-C3, ESP32-C6, ESP32-H2"], "softwareHelp": "https://github.com/RAAMVZ/ESP32-Coder-Releases/releases"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Можно ли работать без интернета?", "acceptedAnswer": {"@type": "Answer", "text": "Да. После установки необходимых SDK, инструментов и библиотек можно писать код, собирать проекты и прошивать платы оффлайн. Для поиска и загрузки новых библиотек или обновлений потребуется подключение."}}, {"@type": "Question", "name": "Нужны ли Arduino IDE, PlatformIO или VS Code?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. ESP32 Coder — самостоятельное Windows-приложение с русским и английским интерфейсом. Нужные SDK и toolchain устанавливаются отдельно через программу."}}, {"@type": "Question", "name": "Можно ли записать BIN без исходников?", "acceptedAnswer": {"@type": "Answer", "text": "Да, если у тебя есть готовый BIN, совместимый с выбранной платой и правильной Flash-разметкой."}}, {"@type": "Question", "name": "А LittleFS можно прошить независимо от приложения?", "acceptedAnswer": {"@type": "Answer", "text": "Да, предусмотрен отдельный режим записи подготовленного образа LittleFS. Адрес и разметка должны совпадать с прошивкой устройства."}}, {"@type": "Question", "name": "Какие семейства ESP32 поддерживаются?", "acceptedAnswer": {"@type": "Answer", "text": "ESP32, ESP32-S2, ESP32-S3, ESP32-C3, ESP32-C6 и ESP32-H2. Доступность конкретной платы и сборки зависит от установленных компонентов."}}, {"@type": "Question", "name": "Как получить обновление?", "acceptedAnswer": {"@type": "Answer", "text": "Загрузи последний релиз на GitHub или используй проверку подписанных обновлений в приложении."}}]}</script>
+</head>
+<body id="top">
+<div aria-hidden="true" class="ambient ambient-a"></div><div aria-hidden="true" class="ambient ambient-b"></div>
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="ESP32 Coder" class="brand" href="./">
+<img alt="ESP32 Coder" class="brand-logo-full" decoding="async" height="544" src="assets/esp32coder-logo.png" width="2048"/>
+</a>
+<nav aria-label="Навигация" class="main-nav">
+<a href="#features">Преимущества</a><a href="#libraries">Библиотеки</a><a href="#flashing">Прошивка</a><a href="#workflow">Процесс</a><a href="docs-ru.html">Документы</a><a href="#faq">FAQ</a>
+</nav>
+<a class="nav-download" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">Скачать <span aria-hidden="true">↗</span></a>
+</div>
+</header>
+<main>
+<div class="feed-stage feed-hero-stage" id="overview">
+<section aria-labelledby="hero-heading" class="hero container">
+<div class="hero-copy">
+<h1 id="hero-heading"><span><em>Одна среда</em></span></h1>
+<p class="hero-intro"><strong>ESP32 Coder подходит пользователям Arduino IDE и PlatformIO.</strong> Простая работа со скетчами, быстрая сборка и никаких обязательных плагинов.</p>
+<div aria-label="Для пользователей Arduino IDE и PlatformIO" class="audience-grid"><div class="audience-card"><span class="audience-label">ARDUINO IDE</span><strong>Просто начать</strong><span>Импорт скетчей и библиотек</span></div><div class="audience-card"><span class="audience-label">PLATFORMIO</span><strong>Удобно продолжать</strong><span>Проекты, зависимости и сборка с кэшем</span></div></div>
+<div class="hero-actions"><a class="btn btn-primary" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest" id="hero-download"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"></path></svg>Скачать для Windows</a><a class="btn btn-subtle" href="#features">Посмотреть возможности <span aria-hidden="true">↗</span></a></div>
+<p class="hero-live-release">Последняя версия GitHub: <a aria-label="Последняя версия GitHub" data-latest-version="" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">проверяем…</a></p>
+<p class="hero-download-note"><strong>Рекомендуем ZIP</strong> с папкой <code>ESP32 Coder</code> внутри. Отдельный EXE в релизе — для автообновления.</p>
+</div>
+<div aria-label="Демонстрация интерфейса ESP32 Coder с многофайловым проектом" class="hero-art hero-screenshot">
+<div aria-hidden="true" class="art-grid"></div>
+<div class="mini-label"><span></span>РЕАЛЬНЫЙ ИНТЕРФЕЙС ПРОГРАММЫ</div>
+<div class="screenshot-carousel" data-carousel="">
+<button aria-label="Предыдущий скриншот" class="carousel-arrow prev" type="button"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22"><path d="M15 18 9 12l6-6"></path></svg></button>
+<div class="carousel-track">
+<figure class="screenshot-figure carousel-slide is-active">
+<a aria-label="Открыть скриншот в полном размере" class="interface-shot" href="assets/interface-ru-coder-css.png" rel="noopener" target="_blank" title="Открыть скриншот в полном размере">
+<img alt="Режим редактора ESP32 Coder с реальным выводом сборки" decoding="async" fetchpriority="high" height="1000" src="assets/interface-ru-coder-css.webp" width="1600"/>
+<span aria-hidden="true" class="screenshot-zoom">↗</span>
+</a>
+<figcaption class="screenshot-caption"><span>Режим редактора · ESP32_Smart_Monitor · 8 исходных файлов · папка libs сверху · пример вывода сборки</span><a download="" href="assets/ESP32_Smart_Monitor_Coder.zip">Скачать проект для ESP32 Coder ↓</a></figcaption>
+</figure>
+<figure class="screenshot-figure carousel-slide">
+<a aria-label="Открыть скриншот монитора порта" class="interface-shot" href="assets/serial-ru-coder-css.png" rel="noopener" target="_blank" title="Открыть скриншот монитора порта">
+<img alt="Монитор порта ESP32 Coder с сообщением System ready и показаниями ADC из демопроекта" decoding="async" height="1000" src="assets/serial-ru-coder-css.webp" width="1600"/>
+<span aria-hidden="true" class="screenshot-zoom">↗</span>
+</a>
+<figcaption class="screenshot-caption"><span>Монитор порта · вывод именно из ESP32_Smart_Monitor.cpp · значения ADC демонстрационные</span><a download="" href="assets/ESP32_Smart_Monitor_Coder.zip">Скачать проект для ESP32 Coder ↓</a></figcaption>
+</figure>
+<figure class="screenshot-figure carousel-slide">
+<a aria-label="Открыть скриншот плоттера" class="interface-shot" href="assets/plotter-ru-coder-css.png" rel="noopener" target="_blank" title="Открыть скриншот плоттера">
+<img alt="Плоттер ESP32 Coder с графиком ADC и средней линии из демопроекта" decoding="async" height="1000" src="assets/plotter-ru-coder-css.webp" width="1600"/>
+<span aria-hidden="true" class="screenshot-zoom">↗</span>
+</a>
+<figcaption class="screenshot-caption"><span>Плоттер · визуализация значений ADC и Avg на основе демопримера ESP32_Smart_Monitor.cpp</span><a download="" href="assets/ESP32_Smart_Monitor_Coder.zip">Скачать проект для ESP32 Coder ↓</a></figcaption>
+</figure>
+</div>
+<button aria-label="Следующий скриншот" class="carousel-arrow next" type="button"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22"><path d="m9 18 6-6-6-6"></path></svg></button>
+<div aria-label="Выбор скриншота" class="carousel-dots">
+<button aria-label="Слайд 1" class="carousel-dot is-active" type="button"></button>
+<button aria-label="Слайд 2" class="carousel-dot" type="button"></button>
+<button aria-label="Слайд 3" class="carousel-dot" type="button"></button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<section aria-labelledby="benefits-title" class="section container benefits-section feed-stage" id="features">
+<div class="section-head"><div class="eyebrow">ГЛАВНЫЕ ПРЕИМУЩЕСТВА</div><h2 id="benefits-title">Простой старт. <em>Серьёзные возможности.</em></h2><p>Привычная разработка ESP32 без сложной настройки.</p></div>
+<div class="benefits-grid">
+<article class="benefit-card"><span class="benefit-index">01 / OFFLINE</span><span aria-hidden="true" class="benefit-symbol">◎</span><h3>Работает оффлайн и без VPN</h3><p>Работает без VPN. После установки компонентов — полностью оффлайн.</p></article>
+<article class="benefit-card"><span class="benefit-index">02 / ALL IN ONE</span><span aria-hidden="true" class="benefit-symbol">▣</span><h3>Всё в одном приложении</h3><p>Редактор, компилятор, прошивальщик, монитор и плоттер.</p></article>
+<article class="benefit-card benefit-turbo"><span class="benefit-index">03 / TURBO BUILD</span><span aria-hidden="true" class="benefit-symbol">ϟ</span><h3>Турбокомпиляция</h3><p>Параллельная сборка, кэш и повторное использование файлов.</p></article>
+<article class="benefit-card"><span class="benefit-index">04 / SMART SCAN</span><span aria-hidden="true" class="benefit-symbol">◇</span><h3>Умный анализ зависимостей</h3><p>Находит зависимости и исключает лишние исходники.</p></article>
+<article class="benefit-card"><span class="benefit-index">05 / BOARDS</span><span aria-hidden="true" class="benefit-symbol">⬡</span><h3>Семейство ESP32</h3><p>ESP32, S2, S3, C3, C6 и H2 — популярные платы и модули.</p><div aria-label="Поддерживаемые семейства" class="chip-pills"><span>ESP32</span><span>S2</span><span>S3</span><span>C3</span><span>C6</span><span>H2</span></div></article>
+<article class="benefit-card"><span class="benefit-index">06 / IMPORT</span><span aria-hidden="true" class="benefit-symbol">⇣</span><h3>Удобный импорт проектов</h3><p>Импорт проектов Arduino IDE и PlatformIO с библиотеками.</p></article>
+<article class="benefit-card benefit-card-updates"><span class="benefit-index">07 / NO DISTRACTIONS</span><div class="benefit-update-copy"><h3>Без назойливых сообщений об обновлениях</h3><p>Обновления библиотек и компонентов отображаются без навязчивых всплывающих окон.</p></div><span aria-hidden="true" class="benefit-symbol">◌</span></article>
+</div>
+</section>
+<section aria-labelledby="libraries-title" class="section container libraries-section feed-stage" id="libraries">
+<div class="section-head"><div class="eyebrow">МЕНЕДЖЕР БИБЛИОТЕК</div><h2 id="libraries-title">Библиотеки и зависимости. <em>Под полным контролем.</em></h2><p>Поиск, импорт, обновление и очистка библиотек прямо в Coder.</p></div>
+<div class="libraries-layout">
+<div class="libraries-spotlight">
+<div class="spotlight-top"><span class="spotlight-mark">📚</span><span class="spotlight-kicker">GITHUB + РУССКОЯЗЫЧНЫЙ ПОИСК</span></div>
+<h3>Поиск библиотек через <em>GitHub + Trema</em></h3>
+<p>Ищи библиотеки на GitHub и через русскоязычное зеркало Trema. Устанавливай прямо в Coder.</p>
+<div class="spotlight-chips"><span>Поиск</span><span>Установка</span><span>Обновление</span></div>
+<div aria-hidden="true" class="spotlight-decoration">#include &lt;Arduino.h&gt;<br/>#include &lt;WiFi.h&gt;<br/>#include &lt;ArduinoJson.h&gt;</div>
+</div>
+<div class="library-list">
+<article class="library-line"><span aria-hidden="true" class="library-check">✓</span><div><h3>Поиск, установка и обновление</h3><p>Управление библиотеками без ручного копирования.</p></div></article>
+<article class="library-line"><span aria-hidden="true" class="library-check">✓</span><div><h3>Импорт из Arduino IDE</h3><p>Импорт из общей папки Arduino IDE.</p></div></article>
+<article class="library-line"><span aria-hidden="true" class="library-check">✓</span><div><h3>Автоматический анализ зависимостей</h3><p>Определяет нужные проекту библиотеки.</p></div></article>
+<article class="library-line"><span aria-hidden="true" class="library-check">✓</span><div><h3>Интеллектуальная очистка</h3><p>Удаляет неиспользуемые библиотеки после проверки или сборки.</p></div></article>
+<article class="library-line"><span aria-hidden="true" class="library-check">✓</span><div><h3>Библиотеки отдельно для каждого проекта</h3><p>Отдельный набор библиотек для каждого проекта.</p></div></article>
+</div>
+</div>
+</section>
+<section class="section container flash-section feed-stage" id="flashing">
+<div class="section-head flash-head"><div class="eyebrow">FLASH TOOLKIT</div><h2>BIN и файловая система. <em>По отдельности.</em></h2><p>Готовый BIN или образ LittleFS можно прошить отдельно, без пересборки.</p></div>
+<div class="flash-panel">
+<div aria-hidden="true" class="flash-panel-lines"></div>
+<div class="flash-cards"><article class="flash-card"><div class="file-emblem"><svg aria-hidden="true" fill="none" height="54" viewbox="0 0 48 54" width="48"><path d="M7 3h22l12 12v35H7z" stroke="currentColor" stroke-width="1.5"></path><path d="M29 3v13h12" stroke="currentColor" stroke-width="1.5"></path></svg><span>.BIN</span></div><div><span class="flash-number">01 — FIRMWARE</span><h3>Прошивка готового BIN</h3><p>Выбери BIN и COM-порт — исходники не нужны.</p></div></article>
+<div aria-hidden="true" class="flash-divider"><span>+</span></div>
+<article class="flash-card"><div class="file-emblem blue-file"><svg aria-hidden="true" fill="none" height="54" viewbox="0 0 48 54" width="48"><path d="M7 3h22l12 12v35H7z" stroke="currentColor" stroke-width="1.5"></path><path d="M29 3v13h12" stroke="currentColor" stroke-width="1.5"></path></svg><span>FS</span></div><div><span class="flash-number">02 — FILESYSTEM</span><h3>Запись LittleFS</h3><p>Записывай LittleFS отдельно от прошивки.</p></div></article></div>
+<div class="flash-bottom"><span>ⓘ Важно: адреса Flash и разметка памяти должны соответствовать выбранной плате и прошивке.</span><a href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">Скачать инструмент ↗</a></div>
+</div>
+</section>
+<section class="section container stance-section feed-stage" id="standalone">
+ <div class="stance">
+  <div aria-hidden="true" class="stance-symbol">
+   <div class="orbit orbit-1"></div>
+   <div class="orbit orbit-2"></div>
+   <div class="core-chip"><svg fill="none" height="110" stroke="currentColor" viewbox="0 0 110 110" width="110"><rect height="60" rx="9" stroke-width="2" width="60" x="25" y="25"></rect><path d="M45 25V13 M65 25V13 M32 85V97 M47 85V97 M63 85V97 M78 85V97 M25 55H13 M85 40H97 M85 55H97 M85 70H97" stroke-width="2"></path></svg><span>ESP32</span></div>
+  </div>
+  <div class="stance-text">
+   <div class="eyebrow">САМОСТОЯТЕЛЬНОЕ ПРИЛОЖЕНИЕ</div>
+   <h2>Слишком просто в Arduino IDE и слишком трудно в <em>PlatformIO</em>?</h2>
+   <p>Проекты, сборка и прошивка — в одном приложении, без VS Code и других IDE.</p>
+   <div class="stance-tags"><span>Без обязательных плагинов</span></div>
+  </div>
+ </div>
+</section>
+<section class="section container workflow-section feed-stage" id="workflow"><div class="section-head"><div class="eyebrow">ПРОЦЕСС</div><h2>Один понятный маршрут к устройству.</h2><p>Проект, сборка, прошивка и монитор — в одном окне.</p></div><div class="step-grid"><div class="step-card"><span class="step-number">01</span><div aria-hidden="true" class="step-track"></div><h3>Открой проект</h3><p>Создай проект или импортируй скетч Arduino.</p></div><div class="step-card"><span class="step-number">02</span><div aria-hidden="true" class="step-track"></div><h3>Проверь и собери</h3><p>Анализ зависимостей и сборка прошивки.</p></div><div class="step-card"><span class="step-number">03</span><div aria-hidden="true" class="step-track"></div><h3>Запиши во Flash</h3><p>Запиши BIN по COM; отдельно — LittleFS.</p></div><div class="step-card"><span class="step-number">04</span><div aria-hidden="true" class="step-track"></div><h3>Посмотри результат</h3><p>Проверь плату в мониторе и плоттере.</p></div></div></section>
+<section class="section container docs-teaser feed-stage" id="docs"><div class="docs-teaser-card"><div><div class="eyebrow">ДОКУМЕНТЫ / РУКОВОДСТВО</div><h2>С чего начать с <em>ESP32 Coder?</em></h2><p>Первый запуск и импорт из Arduino IDE и PlatformIO — с примерами.</p></div><a class="btn btn-primary" href="docs-ru.html">Открыть инструкцию ↗</a></div></section>
+<section class="section container download-section feed-stage" id="download"><div class="download-shell"><div aria-hidden="true" class="download-glow"></div><div class="download-content"><div class="eyebrow">СКАЧАТЬ / WINDOWS</div><h2>ESP32 Coder — новая альтернатива<br/><span>привычным средам разработки!</span></h2><p>Портативная среда для ESP32. Скачай последнюю версию с GitHub; SDK и toolchain устанавливаются из программы.</p><div class="download-folder-hint"><strong>Для первой установки выбирайте ZIP-архив.</strong> В архиве находится папка <code>ESP32 Coder</code>. Распакуйте её, например, в <code>C:\Dev\ESP32 Coder\</code>, и запустите <code>esp32coder.exe</code> из этой папки. <strong>Отдельный EXE предназначен для автообновления.</strong> <a href="docs-ru.html#install">Инструкция ↗</a></div><div class="download-tags"><span>WINDOWS x64</span><span>PORTABLE ZIP</span><span>GITHUB RELEASES</span></div><a class="download-all" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases" id="all-releases">Посмотреть все версии ↗</a></div><div aria-live="polite" class="release-panel"><div class="release-top"><span>ПОСЛЕДНИЙ РЕЛИЗ</span><span class="release-dot"></span></div><strong id="release-version">—</strong><p id="release-status">Проверяем GitHub Releases…</p><a class="btn btn-primary" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest" id="download-latest">Открыть последний релиз на GitHub ↗</a><div class="release-meta" id="release-meta"></div><small>Для установки — ZIP с папкой ESP32 Coder; EXE — для автообновления.</small></div></div></section>
+<section class="section container faq-section feed-stage" id="faq"><div class="section-head"><div class="eyebrow">КРАТКО О ГЛАВНОМ</div><h2>Вопросы перед стартом</h2></div><div class="faq-grid"><details><summary>Можно ли работать без интернета?</summary><p>Да. После установки необходимых SDK, инструментов и библиотек можно писать код, собирать проекты и прошивать платы оффлайн. Для поиска и загрузки новых библиотек или обновлений потребуется подключение.</p></details><details><summary>Нужны ли Arduino IDE, PlatformIO или VS Code?</summary><p>Нет. ESP32 Coder — самостоятельное Windows-приложение с русским и английским интерфейсом. Нужные SDK и toolchain устанавливаются отдельно через программу.</p></details><details><summary>Можно ли записать BIN без исходников?</summary><p>Да, если у тебя есть готовый BIN, совместимый с выбранной платой и правильной Flash-разметкой.</p></details><details><summary>А LittleFS можно прошить независимо от приложения?</summary><p>Да, предусмотрен отдельный режим записи подготовленного образа LittleFS. Адрес и разметка должны совпадать с прошивкой устройства.</p></details><details><summary>Какие семейства ESP32 поддерживаются?</summary><p>ESP32, ESP32-S2, ESP32-S3, ESP32-C3, ESP32-C6 и ESP32-H2. Доступность конкретной платы и сборки зависит от установленных компонентов.</p></details><details><summary>Как получить обновление?</summary><p>Загрузи последний релиз на GitHub или используй проверку подписанных обновлений в приложении.</p></details></div></section>
+</main>
+<nav aria-label="Навигация по разделам" class="feed-nav">
+<a aria-current="step" aria-label="Главная" href="#overview" title="Главная"><span class="feed-nav-dot"></span><span class="feed-nav-text">Главная</span></a>
+<a aria-label="Преимущества" href="#features" title="Преимущества"><span class="feed-nav-dot"></span><span class="feed-nav-text">Преимущества</span></a>
+<a aria-label="Библиотеки" href="#libraries" title="Библиотеки"><span class="feed-nav-dot"></span><span class="feed-nav-text">Библиотеки</span></a>
+<a aria-label="Прошивка" href="#flashing" title="Прошивка"><span class="feed-nav-dot"></span><span class="feed-nav-text">Прошивка</span></a>
+<a aria-label="О программе" href="#standalone" title="О программе"><span class="feed-nav-dot"></span><span class="feed-nav-text">О программе</span></a>
+<a aria-label="Процесс" href="#workflow" title="Процесс"><span class="feed-nav-dot"></span><span class="feed-nav-text">Процесс</span></a>
+<a aria-label="Документы" href="#docs" title="Документы"><span class="feed-nav-dot"></span><span class="feed-nav-text">Документы</span></a>
+<a aria-label="Скачать" href="#download" title="Скачать"><span class="feed-nav-dot"></span><span class="feed-nav-text">Скачать</span></a>
+<a aria-label="FAQ" href="#faq" title="FAQ"><span class="feed-nav-dot"></span><span class="feed-nav-text">FAQ</span></a>
+</nav>
+<footer class="site-footer"><div class="container footer-inner"><a class="footer-brand" href="./"><img alt="ESP32 Coder" class="footer-brand-logo" height="544" src="assets/esp32coder-logo.png" width="2048"/></a><p>ESP32 Coder — сфокусированная рабочая среда для разработки под ESP32.</p><div class="footer-links"><a href="docs-ru.html">Документы</a><a data-repo-link="releases" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases">Все релизы</a><a data-repo-link="repo" href="https://github.com/RAAMVZ/ESP32-Coder-Releases">GitHub</a><a href="#top">Наверх ↑</a></div></div></footer>
+</body></html>
