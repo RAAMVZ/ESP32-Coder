@@ -5,7 +5,7 @@
   // Keep repository links correct on GitHub Pages after a username change.
   const pagesHost=/^([a-zA-Z0-9-]+)\.github\.io$/i.exec(location.hostname);
   const pagesPath=location.pathname.split('/').filter(Boolean)[0];
-  if(pagesHost && pagesPath && /^ESP32-Coder-Releases$/i.test(pagesPath)) repo=`${pagesHost[1]}/${pagesPath}`;
+  if(pagesHost && pagesPath && /^ESP32-Coder$/i.test(pagesPath)) repo=`${pagesHost[1]}/${pagesPath}`;
   const match=/^([a-zA-Z0-9-]{1,39})\/([a-zA-Z0-9_.-]{1,100})$/.exec(repo);
   const locale=document.documentElement.lang==='en'?'en':'ru';
   const text=locale==='ru'?{
@@ -23,7 +23,7 @@
     open:'Open latest release on GitHub ↗',
     size:'ZIP size',date:'Published',nozip:'No ZIP asset was found in this release — check its GitHub files.'
   };
-  const root=match ? `https://github.com/${match[1]}/${match[2]}` : 'https://github.com/RAAMVZ/ESP32-Coder-Releases';
+  const root=match ? `https://github.com/${match[1]}/${match[2]}` : 'https://github.com/RAAMVZ/ESP32-Coder';
   const latestUrl=`${root}/releases/latest`;
   const releasesUrl=`${root}/releases`;
   const elements={
@@ -58,7 +58,7 @@
     const tag=String(release.tag_name||'');
     if(elements.version)elements.version.textContent=tag||'—';
     document.querySelectorAll('[data-latest-version]').forEach(el=>{el.textContent=tag||'GitHub';el.href=latestUrl;});
-    if(/^v\d+\.\d+\.\d+$/.test(tag))document.querySelectorAll('.wver').forEach(el=>{el.textContent=tag;});
+    if(tag)document.querySelectorAll('[data-doc-version], .wver').forEach(el=>{el.textContent=tag;});
     if(elements.status)elements.status.textContent=text.found;
     const parts=[];
     const zip=Array.isArray(release.assets)?release.assets.find(asset=>/\.zip$/i.test(asset.name||'') && /^ESP32[-_ ]?Coder/i.test(asset.name||'')):null;
