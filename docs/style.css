@@ -2223,3 +2223,30 @@ body html.feed-page .faq-grid details[open] p {color:#ffffff;}
 .footer-copy .docs-footer-meta{margin-top:5px;font-size:13px;}
 @media(max-width:950px){.footer-copy{flex:1 1 58%;}}
 @media(max-width:680px){.footer-copy{flex-basis:auto;}}
+
+
+/* Mobile screenshot pinch zoom. Only the open viewer captures touch gestures. */
+.screenshot-lightbox .lightbox-image-wrap{overflow:hidden;touch-action:none;overscroll-behavior:contain}
+.screenshot-lightbox .lightbox-image{transform-origin:center center;will-change:transform;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;pointer-events:none}
+.screenshot-lightbox .lightbox-image-wrap.is-zoomed{cursor:grab}
+
+/* Larger guide text in both languages, including captions, steps, code and mobile. */
+body .docs-section p,body .docs-section ol,body .docs-section ul,
+body .docs-section details p{font-size:17px;line-height:1.75}
+body .docs-section p.docs-muted,body .docs-note,body .docs-notice,
+body .docs-action-grid p{font-size:15px;line-height:1.7}
+body .docs-sidebar a{font-size:15px;line-height:1.5}
+body .docs-sidebar-title,body .docs-step,body .docs-breadcrumb{font-size:13px}
+body .docs-tree,body .docs-code{font-size:14px;line-height:1.6}
+body .docs-hero>p{font-size:18px}
+body .docs-section summary{font-size:17px}
+@media(max-width:680px){
+ body .docs-section p,body .docs-section ol,body .docs-section ul,
+ body .docs-section details p{font-size:16px;line-height:1.7}
+ body .docs-section p.docs-muted,body .docs-note,body .docs-notice,
+ body .docs-action-grid p{font-size:15px}
+ body .docs-sidebar a{font-size:14px;line-height:1.5}
+ body .docs-tree,body .docs-code{font-size:13px;line-height:1.65}
+ body .docs-hero>p{font-size:17px}
+ body .docs-section summary{font-size:16px}
+}
