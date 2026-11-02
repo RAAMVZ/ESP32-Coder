@@ -2,30 +2,31 @@
 
 <html lang="ru"><head>
 <meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Документы — быстрый старт и импорт проектов | ESP32 Coder</title>
+<title>Документация | ESP32 Coder - удобная среда для программирования ESP32</title>
 <meta content="Как установить ESP32 Coder в отдельную папку, настроить SDK и импортировать Arduino IDE, PlatformIO и родные проекты." name="description"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/docs-ru.html" rel="canonical"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/docs-ru.html" hreflang="ru" rel="alternate"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/docs-en.html" hreflang="en" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder/docs-ru.html" rel="canonical"/>
+<link href="https://raamvz.github.io/ESP32-Coder/docs-ru.html" hreflang="ru" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder/docs-en.html" hreflang="en" rel="alternate"/>
 <link href="assets/favicon.png" rel="icon" type="image/png"/>
 <link href="style.css" rel="stylesheet"/>
+<script defer src="site-config.js"></script><script defer src="docs-version.js"></script>
 </head><body id="top">
 <div aria-hidden="true" class="ambient ambient-a"></div><div aria-hidden="true" class="ambient ambient-b"></div>
 <header class="site-header"><div class="container header-inner">
 <a aria-label="ESP32 Coder" class="brand" href="ru.html"><img alt="ESP32 Coder" class="brand-logo-full" height="544" src="assets/esp32coder-logo.png" width="2048"/></a>
 <nav aria-label="Навигация" class="main-nav docs-top-nav"><a href="ru.html">Главная</a><a href="#first-run">Начало</a><a href="#arduino">Arduino IDE</a><a href="#platformio">PlatformIO</a></nav>
-<a class="nav-download" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">Скачать ↗</a>
+<a class="nav-download" href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">Скачать ↗</a>
 </div></header>
 <main class="docs-page"><section class="container docs-hero">
 <div class="docs-breadcrumb"><a href="ru.html">Главная</a><span>/</span><span>Документы</span></div>
-<div class="eyebrow">РУКОВОДСТВО / ESP32 CODER v1.1.5</div>
+<div class="eyebrow">РУКОВОДСТВО / ESP32 CODER <span class="wver" data-doc-version>Проверка версии…</span></div>
 <h1>Начните работать <em>без лишних настроек</em></h1>
 <p>Пошаговая инструкция по первой настройке, открытию проекта ESP32 Coder и импорту из Arduino IDE и PlatformIO.</p>
 
 </section><div class="container docs-layout"><aside class="docs-sidebar"><div class="docs-sidebar-title">СОДЕРЖАНИЕ</div><a href="#install">01 · Установка</a><a href="#first-run">02 · Первый запуск</a><a href="#coder-project">03 · Проект Coder</a><a href="#arduino">04 · Импорт Arduino IDE</a><a href="#platformio">05 · Импорт PlatformIO</a><a href="#libraries-doc">06 · Библиотеки</a><a href="#build-upload">07 · Сборка и прошивка</a><a href="#troubleshooting">08 · Частые вопросы</a></aside><div class="docs-body">
 <section class="docs-section" id="install"><div class="docs-step">01 / ПЕРВЫЙ ЗАПУСК</div><h2>Установка — в отдельную папку</h2>
-<div class="docs-notice"><strong>Рекомендуем скачивать ZIP-архив с папкой <code>ESP32 Coder</code> внутри.</strong> На <a href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">странице последнего релиза GitHub</a> выбирайте именно ZIP. Отдельный файл <code>.exe</code> в списке релиза предназначен для автоматического обновления. Не запускайте программу прямо из архива или временной папки: компоненты, кэш, настройки и проекты требуют постоянной папки с правом записи.</div>
-<ol><li>Откройте <a href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">последний релиз ESP32 Coder</a> и скачайте <strong>ZIP-архив</strong>.</li><li>Создайте постоянный каталог для программ, например <code>C:\Dev\</code> (желательно без кириллицы и OneDrive).</li><li>Распакуйте из ZIP <strong>папку <code>ESP32 Coder</code> целиком</strong>. В результате получится <code>C:\Dev\ESP32 Coder\</code>.</li><li>Запускайте <code>esp32coder.exe</code> из этой папки. Сохраняйте каталог целиком при дальнейшей работе; отдельный EXE из GitHub Releases используйте только по назначению механизма автообновления.</li></ol>
+<div class="docs-notice"><strong>Рекомендуем скачивать ZIP-архив с папкой <code>ESP32 Coder</code> внутри.</strong> На <a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">странице последнего релиза GitHub</a> выбирайте именно ZIP. Отдельный файл <code>.exe</code> в списке релиза предназначен для автоматического обновления. Не запускайте программу прямо из архива или временной папки: компоненты, кэш, настройки и проекты требуют постоянной папки с правом записи.</div>
+<ol><li>Откройте <a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">последний релиз ESP32 Coder</a> и скачайте <strong>ZIP-архив</strong>.</li><li>Создайте постоянный каталог для программ, например <code>C:\Dev\</code> (желательно без кириллицы и OneDrive).</li><li>Распакуйте из ZIP <strong>папку <code>ESP32 Coder</code> целиком</strong>. В результате получится <code>C:\Dev\ESP32 Coder\</code>.</li><li>Запускайте <code>esp32coder.exe</code> из этой папки. Сохраняйте каталог целиком при дальнейшей работе; отдельный EXE из GitHub Releases используйте только по назначению механизма автообновления.</li></ol>
 <pre class="docs-tree"><code>C:\Dev\ESP32 Coder\
 ├── esp32coder.exe
 ├── runtime\          (компоненты)
@@ -33,14 +34,14 @@
 │   └── MyProject1\
 │       ├── libs\
 │       ├── MyProject1.cpp
-│       └── esp32studio.ini
+│       └── esp32coder.ini
 └── build_temp\       (возможна после сборки)</code></pre><p class="docs-muted">В обычном случае build_temp создаётся рядом с программой при сборке. Если путь содержит кириллицу или находится в OneDrive, Coder может перенести временную сборку в локальный каталог Windows.</p>
 <p class="docs-muted">Не рекомендуем <code>Program Files</code> без прав записи. Папка Projects создаётся программой автоматически.</p></section>
 <section class="docs-section" id="first-run"><div class="docs-step">02 / НАСТРОЙКА</div><h2>Выберите плату и установите компоненты</h2>
 <ol><li>Запустите ESP32 Coder и в меню <strong>«Плата, порт»</strong> выберите вашу модель. Для примеров ниже — <strong>ESP32 Dev Module</strong>.</li><li>Откройте <strong>«Компоненты»</strong> и установите предлагаемые для выбранной платы <strong>SDK/Arduino Core и toolchain</strong>. Набор зависит от семейства ESP32.</li><li>При необходимости откройте <strong>«Библиотеки»</strong> и установите внешние библиотеки проекта.</li><li>Подключите плату USB-кабелем с передачей данных и выберите её COM-порт.</li></ol>
 <p class="docs-muted">ESP32 Coder работает без VPN: для локального редактирования, сборки и прошивки он не нужен. Первоначальная загрузка SDK, инструментов и библиотек требует интернета; после установки можно работать оффлайн.</p></section>
 <section class="docs-section" id="coder-project"><div class="docs-step">03 / РОДНОЙ ФОРМАТ</div><h2>Готовый проект ESP32 Coder</h2>
-<p>Демонстрационный <strong>ESP32_Smart_Monitor</strong> — проект с восемью исходными файлами: Wi-Fi точка доступа, HTTP-страница с JSON, чтение ADC и настройки через Preferences. Архив теперь содержит конфигурацию <code>esp32studio.ini</code> и каталог <code>libs/</code> — это формат проекта Coder.</p>
+<p>Демонстрационный <strong>ESP32_Smart_Monitor</strong> — проект с восемью исходными файлами: Wi-Fi точка доступа, HTTP-страница с JSON, чтение ADC и настройки через Preferences. Архив теперь содержит конфигурацию <code>esp32coder.ini</code> и каталог <code>libs/</code> — это формат проекта Coder.</p>
 <pre class="docs-tree"><code>ESP32_Smart_Monitor/
 ├── libs/                ← библиотеки проекта
 ├── ESP32_Smart_Monitor.cpp
@@ -51,7 +52,7 @@
 ├── WebDashboard.cpp
 ├── SettingsStore.h
 ├── SettingsStore.cpp
-└── esp32studio.ini      ← настройки проекта</code></pre><p class="docs-muted">Coder создаёт папку проекта и каталог libs/, но не создаёт src/ и include/. Исходники и заголовки в этом примере лежат в корне проекта.</p>
+└── esp32coder.ini      ← настройки проекта</code></pre><p class="docs-muted">Coder создаёт папку проекта и каталог libs/, но не создаёт src/ и include/. Исходники и заголовки в этом примере лежат в корне проекта.</p>
 <ol><li><a download="" href="assets/ESP32_Smart_Monitor_Coder.zip">Скачайте проект в формате ESP32 Coder ↓</a>.</li><li>Распакуйте папку <code>ESP32_Smart_Monitor</code> в <code>C:\Dev\ESP32 Coder\Projects\</code> или другую постоянную папку проекта.</li><li>В Coder выберите <strong>«Открыть» → «Открыть проект»</strong> и откройте <code>ESP32_Smart_Monitor</code>.</li><li>Выберите ESP32 Dev Module и нажмите <strong>«Проверить»</strong> или <strong>«Собрать»</strong>.</li></ol>
 <div class="docs-note">В примере используется вход ADC <code>GPIO34</code>, подходящий для классической ESP32 Dev Module. Для ESP32-S3/C3 и других плат измените номер вывода и проверьте аппаратную совместимость. Пример не проверен на реальной плате.</div>
 <h3>Что выводит монитор порта (115200 бод)</h3>
@@ -73,7 +74,7 @@ ADC: 1.68 V | Avg: 1.54 V</code></pre>
 void setup() { Serial.begin(115200); pinMode(LED_PIN, OUTPUT); }
 void loop() { digitalWrite(LED_PIN, HIGH); delay(500); digitalWrite(LED_PIN, LOW); delay(500); }</code></pre>
 <ol><li><a download="" href="assets/Arduino_Import_Example.zip">Скачайте пример Arduino IDE ↓</a> и распакуйте его <strong>вне</strong> папки Coder Projects.</li><li>В программе нажмите <strong>«Открыть» → «Импорт проекта Arduino IDE»</strong>.</li><li>Выберите <strong>папку</strong> <code>Arduino_Blink_Serial</code> (в ней лежит <code>.ino</code>).</li><li>Укажите имя нового проекта и подтвердите импорт — он появится в <code>Projects/</code>.</li><li>Проверьте плату, библиотеки, затем нажмите <strong>«Проверить»</strong> или <strong>«Собрать»</strong>.</li></ol>
-<div class="docs-note">ESP32 Coder адаптирует Arduino-скетч к C++ и создаёт собственный <code>esp32studio.ini</code>. Оригинал из Arduino IDE остаётся на месте.</div></section>
+<div class="docs-note">ESP32 Coder адаптирует Arduino-скетч к C++ и создаёт собственный <code>esp32coder.ini</code>. Оригинал из Arduino IDE остаётся на месте.</div></section>
 <section class="docs-section" id="platformio"><div class="docs-step">05 / ИМПОРТ ИЗ PLATFORMIO</div><h2>Как импортировать проект PlatformIO</h2>
 <p>Для импорта выберите <strong>корневую папку</strong> проекта, где находится <code>platformio.ini</code>. Не выбирайте отдельно <code>src/</code>.</p>
 <p>Структура ниже относится к исходному проекту PlatformIO, а не к проекту Coder:</p><pre class="docs-tree"><code>PlatformIO_Blink_Serial/
@@ -81,14 +82,14 @@ void loop() { digitalWrite(LED_PIN, HIGH); delay(500); digitalWrite(LED_PIN, LOW
 ├── src/
 │   └── main.cpp
 └── include/
-    └── BlinkConfig.h</code></pre><p>После импорта в Coder исходники main.cpp и BlinkConfig.h располагаются в корне новой папки проекта; также создаются esp32studio.ini и libs/.</p>
+    └── BlinkConfig.h</code></pre><p>После импорта в Coder исходники main.cpp и BlinkConfig.h располагаются в корне новой папки проекта; также создаются esp32coder.ini и libs/.</p>
 <pre class="docs-code"><code>[env:esp32dev]
 platform = espressif32
 board = esp32dev
 framework = arduino
 monitor_speed = 115200</code></pre>
 <ol><li><a download="" href="assets/PlatformIO_Import_Example.zip">Скачайте пример PlatformIO ↓</a> и распакуйте в отдельное место.</li><li>Выберите <strong>«Открыть» → «Импорт проекта PlatformIO»</strong>.</li><li>Укажите папку <code>PlatformIO_Blink_Serial</code> с <code>platformio.ini</code>.</li><li>Подтвердите имя проекта. Кодер перенесёт исходники, настройки платы и сведения о зависимостях в собственный проект.</li><li>Проверьте выбранную плату и установленные библиотеки. Нажмите <strong>«Собрать»</strong>.</li></ol>
-<div class="docs-note"><code>platformio.ini</code> используется для чтения параметров, но в проект Coder не копируется. Вместо него создаётся <code>esp32studio.ini</code>. Локальные библиотеки из <code>lib/</code> и доступного кэша <code>.pio/libdeps/</code> могут импортироваться в <code>libs/</code>; отсутствующие зависимости устанавливаются отдельно.</div></section>
+<div class="docs-note"><code>platformio.ini</code> используется для чтения параметров, но в проект Coder не копируется. Вместо него создаётся <code>esp32coder.ini</code>. Локальные библиотеки из <code>lib/</code> и доступного кэша <code>.pio/libdeps/</code> могут импортироваться в <code>libs/</code>; отсутствующие зависимости устанавливаются отдельно.</div></section>
 <section class="docs-section" id="libraries-doc"><div class="docs-step">06 / БИБЛИОТЕКИ</div><h2>Библиотеки и зависимости</h2>
 <p>В каждом проекте есть собственная папка <code>libs/</code>. Откройте <strong>«Библиотеки»</strong>, чтобы искать, устанавливать и обновлять зависимости. Русский интерфейс поддерживает поиск через зеркало Trema. Есть импорт библиотек из общей папки Arduino IDE, если они уже установлены на компьютере.</p>
 <p>Для проектов с внешними заголовками сначала выполните анализ зависимостей и при необходимости установите недостающие пакеты; исходные файлы из примеров выше используют стандартные библиотеки ядра ESP32.</p></section>
@@ -100,5 +101,5 @@ monitor_speed = 115200</code></pre>
 <details><summary>Импорт не видит .ino или platformio.ini</summary><p>Выбирайте корневую папку: для Arduino — каталог с главным .ino, для PlatformIO — каталог с platformio.ini.</p></details>
 <details><summary>Нет COM-порта</summary><p>Проверьте USB-кабель, драйвер USB-UART и не занят ли порт другим монитором. После подключения обновите список портов.</p></details>
 <details><summary>Не сохраняются проекты или кэш</summary><p>Убедитесь, что программа распакована и запущена из отдельной папки, доступной для записи, а не из ZIP или временной папки.</p></details>
-</section></div></div></main><footer class="site-footer"><div class="container footer-inner"><a class="footer-brand" href="ru.html"><img alt="ESP32 Coder" class="footer-brand-logo" height="544" src="assets/esp32coder-logo.png" width="2048"/></a><p>Документация · ESP32 Coder v1.1.5</p><div class="footer-links"><a href="ru.html">Главная</a><a href="#top">Наверх ↑</a></div></div></footer>
+</section></div></div></main><footer class="site-footer"><div class="container footer-inner"><a class="footer-brand" href="ru.html"><img alt="ESP32 Coder" class="footer-brand-logo" height="512" src="assets/ESP32Coder.png" width="512"/></a><div class="footer-copy"><p>ESP32 Coder — сфокусированная рабочая среда для разработки под ESP32</p><p class="docs-footer-meta">Документация · ESP32 Coder <span class="wver" data-doc-version>Проверка версии…</span></p></div><div class="footer-links"><a href="ru.html">Главная</a><a href="#top">Наверх ↑</a></div></div></footer>
 </body></html>
