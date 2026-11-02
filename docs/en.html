@@ -4,36 +4,36 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>ESP32 Coder — for Arduino IDE &amp; PlatformIO users | Windows ESP32 IDE</title>
+<title>ESP32 Coder - an easy-to-use environment for ESP32 programming</title>
 <meta content="ESP32 Coder suits Arduino IDE and PlatformIO users. Import sketches and libraries, manage dependencies, build and flash ESP32 firmware in a standalone Windows IDE." name="description"/>
 <meta content="ESP32 IDE Windows, standalone ESP32 IDE, ESP32 Coder, ESP32-S3 C++, ESP32-C3 IDE, flash BIN ESP32, LittleFS flashing, Arduino IDE alternative, no PlatformIO plugins" name="keywords"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
 <meta content="#080d16" name="theme-color"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/en.html" rel="canonical"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/ru.html" hreflang="ru" rel="alternate"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/en.html" hreflang="en" rel="alternate"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/en.html" hreflang="x-default" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder/en.html" rel="canonical"/>
+<link href="https://raamvz.github.io/ESP32-Coder/ru.html" hreflang="ru" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder/en.html" hreflang="en" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder/en.html" hreflang="x-default" rel="alternate"/>
 <meta content="website" property="og:type"/>
 <meta content="ESP32 Coder" property="og:site_name"/>
 <meta content="en_US" property="og:locale"/>
 <meta content="ru_RU" property="og:locale:alternate"/>
-<meta content="ESP32 Coder — for Arduino IDE &amp; PlatformIO users | Windows ESP32 IDE" property="og:title"/>
+<meta content="ESP32 Coder - an easy-to-use environment for ESP32 programming" property="og:title"/>
 <meta content="ESP32 Coder suits Arduino IDE and PlatformIO users. Import sketches and libraries, manage dependencies, build and flash ESP32 firmware in a standalone Windows IDE." property="og:description"/>
-<meta content="https://raamvz.github.io/ESP32-Coder-Releases/en.html" property="og:url"/>
-<meta content="https://raamvz.github.io/ESP32-Coder-Releases/assets/social-preview.png" property="og:image"/>
+<meta content="https://raamvz.github.io/ESP32-Coder/en.html" property="og:url"/>
+<meta content="https://raamvz.github.io/ESP32-Coder/assets/social-preview.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="ESP32 Coder — standalone ESP32 IDE for Windows" property="og:image:alt"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="ESP32 Coder — for Arduino IDE &amp; PlatformIO users | Windows ESP32 IDE" name="twitter:title"/>
+<meta content="ESP32 Coder - an easy-to-use environment for ESP32 programming" name="twitter:title"/>
 <meta content="ESP32 Coder suits Arduino IDE and PlatformIO users. Import sketches and libraries, manage dependencies, build and flash ESP32 firmware in a standalone Windows IDE." name="twitter:description"/>
-<meta content="https://raamvz.github.io/ESP32-Coder-Releases/assets/social-preview.png" name="twitter:image"/>
+<meta content="https://raamvz.github.io/ESP32-Coder/assets/social-preview.png" name="twitter:image"/>
 <link href="assets/favicon.png" rel="icon" type="image/png"/>
 <link href="assets/esp32coder-icon.png" rel="apple-touch-icon"/>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="site-config.js"></script>
 <script defer="" src="app.js"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ESP32 Coder", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://raamvz.github.io/ESP32-Coder-Releases/en.html", "image": "https://raamvz.github.io/ESP32-Coder-Releases/assets/social-preview.png", "description": "ESP32 Coder suits Arduino IDE and PlatformIO users. Import sketches and libraries, manage dependencies, build and flash ESP32 firmware in a standalone Windows IDE.", "featureList": ["ESP32 C/C++ editor", "ESP32 and Arduino Core firmware compilation", "Standalone BIN firmware flashing", "Separate LittleFS filesystem image flashing", "Serial Monitor and plotter", "Library dependency analysis"], "softwareHelp": "https://github.com/RAAMVZ/ESP32-Coder-Releases/releases"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ESP32 Coder", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://raamvz.github.io/ESP32-Coder/en.html", "image": "https://raamvz.github.io/ESP32-Coder/assets/social-preview.png", "description": "ESP32 Coder suits Arduino IDE and PlatformIO users. Import sketches and libraries, manage dependencies, build and flash ESP32 firmware in a standalone Windows IDE.", "featureList": ["ESP32 C/C++ editor", "ESP32 and Arduino Core firmware compilation", "Standalone BIN firmware flashing", "Separate LittleFS filesystem image flashing", "Serial Monitor and plotter", "Library dependency analysis"], "softwareHelp": "https://github.com/RAAMVZ/ESP32-Coder/releases"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need Arduino IDE or VS Code?", "acceptedAnswer": {"@type": "Answer", "text": "No. ESP32 Coder is a standalone Windows app. Required SDKs and toolchains can be installed from its interface."}}, {"@type": "Question", "name": "Can I flash a BIN without the source code?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if you have a ready-made BIN that matches the target board and its flash layout."}}, {"@type": "Question", "name": "Can LittleFS be flashed independently?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A separate mode writes a prepared LittleFS filesystem image. Use the correct partition address and layout."}}, {"@type": "Question", "name": "Are ESP32-S3 and ESP32-C3 supported?", "acceptedAnswer": {"@type": "Answer", "text": "The app includes ESP32 board families such as ESP32-S3 and ESP32-C3. Available configurations depend on installed components."}}, {"@type": "Question", "name": "Where can I find updates?", "acceptedAnswer": {"@type": "Answer", "text": "Download the latest GitHub Release or use the app’s signed-update check."}}]}</script>
 </head>
 <body id="top">
@@ -46,7 +46,7 @@
 <nav aria-label="Navigation" class="main-nav">
 <a href="#features">Features</a><a href="#libraries">Libraries</a><a href="#flashing">Flashing</a><a href="#workflow">Workflow</a><a href="docs-en.html">Docs</a><a href="#faq">FAQ</a>
 </nav>
-<a class="nav-download" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">Download <span aria-hidden="true">↗</span></a>
+<a class="nav-download" href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">Download <span aria-hidden="true">↗</span></a>
 </div>
 </header>
 <main>
@@ -56,8 +56,8 @@
 <h1 id="hero-heading"><span><em>One workspace</em></span></h1>
 <p class="hero-intro"><strong>ESP32 Coder is built for both Arduino IDE enthusiasts and experienced PlatformIO users.</strong> The familiar simplicity of Arduino sketches meets project management, dependency analysis and efficient builds — in a standalone app with no editor plugins.</p>
 <div aria-label="For Arduino IDE and PlatformIO users" class="audience-grid"><div class="audience-card"><span class="audience-label">ARDUINO IDE</span><strong>Easy to get started</strong><span>Import sketches and libraries</span></div><div class="audience-card"><span class="audience-label">PLATFORMIO</span><strong>Ready for bigger projects</strong><span>Projects, dependencies and cached builds</span></div></div>
-<div class="hero-actions"><a class="btn btn-primary" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest" id="hero-download"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"></path></svg>Download for Windows</a><a class="btn btn-subtle" href="#features">Explore the tools <span aria-hidden="true">↗</span></a></div>
-<p class="hero-live-release">Latest GitHub version: <a aria-label="Latest GitHub version" data-latest-version="" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">checking…</a></p>
+<div class="hero-actions"><a class="btn btn-primary" href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest" id="hero-download"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"></path></svg>Download for Windows</a><a class="btn btn-subtle" href="#features">Explore the tools <span aria-hidden="true">↗</span></a></div>
+<p class="hero-live-release">Latest GitHub version: <a aria-label="Latest GitHub version" data-latest-version="" href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">checking…</a></p>
 <p class="hero-download-note"><strong>Choose the ZIP archive</strong> containing the <code>ESP32 Coder</code> folder. The separate EXE release asset is for automatic updates.</p>
 </div>
 <div aria-label="ESP32 Coder real interface showing a multi-file example project" class="hero-art hero-screenshot">
@@ -137,7 +137,7 @@
 <div class="flash-cards"><article class="flash-card"><div class="file-emblem"><svg aria-hidden="true" fill="none" height="54" viewbox="0 0 48 54" width="48"><path d="M7 3h22l12 12v35H7z" stroke="currentColor" stroke-width="1.5"></path><path d="M29 3v13h12" stroke="currentColor" stroke-width="1.5"></path></svg><span>.BIN</span></div><div><span class="flash-number">01 — FIRMWARE</span><h3>Flash a ready-made BIN</h3><p>Select a compatible BIN and COM port.</p></div></article>
 <div aria-hidden="true" class="flash-divider"><span>+</span></div>
 <article class="flash-card"><div class="file-emblem blue-file"><svg aria-hidden="true" fill="none" height="54" viewbox="0 0 48 54" width="48"><path d="M7 3h22l12 12v35H7z" stroke="currentColor" stroke-width="1.5"></path><path d="M29 3v13h12" stroke="currentColor" stroke-width="1.5"></path></svg><span>FS</span></div><div><span class="flash-number">02 — FILESYSTEM</span><h3>Flash a LittleFS image</h3><p>Flash LittleFS separately from the app.</p></div></article></div>
-<div class="flash-bottom"><span>ⓘ Important: flash addresses and partition layout must match the target board and firmware.</span><a href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">Get the flashing tools ↗</a></div>
+<div class="flash-bottom"><span>ⓘ Important: flash addresses and partition layout must match the target board and firmware.</span><a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">Get the flashing tools ↗</a></div>
 </div>
 </section>
 <section class="section container stance-section feed-stage" id="standalone">
@@ -156,7 +156,7 @@
 </section>
 <section class="section container workflow-section feed-stage" id="workflow"><div class="section-head"><div class="eyebrow">WORKFLOW</div><h2>One clear path to the device.</h2><p>Build, flash and monitor in one app.</p></div><div class="step-grid"><div class="step-card"><span class="step-number">01</span><div aria-hidden="true" class="step-track"></div><h3>Open a project</h3><p>Create a project or import an Arduino sketch.</p></div><div class="step-card"><span class="step-number">02</span><div aria-hidden="true" class="step-track"></div><h3>Verify and build</h3><p>Resolve dependencies and build firmware.</p></div><div class="step-card"><span class="step-number">03</span><div aria-hidden="true" class="step-track"></div><h3>Flash the device</h3><p>Flash BIN over COM or LittleFS separately.</p></div><div class="step-card"><span class="step-number">04</span><div aria-hidden="true" class="step-track"></div><h3>Inspect the result</h3><p>Check the board with Serial Monitor or plotter.</p></div></div></section>
 <section class="section container docs-teaser feed-stage" id="docs"><div class="docs-teaser-card"><div><div class="eyebrow">DOCS / GETTING STARTED</div><h2>Start building with <em>ESP32 Coder.</em></h2><p>First launch and Arduino/PlatformIO imports, with examples.</p></div><a class="btn btn-primary" href="docs-en.html">Read the docs ↗</a></div></section>
-<section class="section container download-section feed-stage" id="download"><div class="download-shell"><div aria-hidden="true" class="download-glow"></div><div class="download-content"><div class="eyebrow">DOWNLOAD / WINDOWS</div><h2>Keep ESP32 in focus.<br/><span>Everything else in one workspace.</span></h2><p>Portable Windows IDE. Get the latest release on GitHub; install ESP32 components from the app.</p><div class="download-folder-hint"><strong>For first-time installation, choose the ZIP archive.</strong> It includes the <code>ESP32 Coder</code> folder. Extract it, for example, to <code>C:\Dev\ESP32 Coder\</code>and run <code>esp32coder.exe</code> inside it. <strong>The separate EXE is for auto-updates.</strong> <a href="docs-en.html#install">Installation guide ↗</a></div><div class="download-tags"><span>WINDOWS x64</span><span>PORTABLE ZIP</span><span>GITHUB RELEASES</span></div><a class="download-all" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases" id="all-releases">Browse all releases ↗</a></div><div aria-live="polite" class="release-panel"><div class="release-top"><span>LATEST RELEASE</span><span class="release-dot"></span></div><strong id="release-version">—</strong><p id="release-status">Checking GitHub Releases…</p><a class="btn btn-primary" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest" id="download-latest">Open latest release on GitHub ↗</a><div class="release-meta" id="release-meta"></div><small>Install from ZIP; the separate EXE is for auto-updates.</small></div></div></section>
+<section class="section container download-section feed-stage" id="download"><div class="download-shell"><div aria-hidden="true" class="download-glow"></div><div class="download-content"><div class="eyebrow">DOWNLOAD / WINDOWS</div><h2>Keep ESP32 in focus.<br/><span>Everything else in one workspace.</span></h2><p>Portable Windows IDE. Get the latest release on GitHub; install ESP32 components from the app.</p><div class="download-folder-hint"><strong>For first-time installation, choose the ZIP archive.</strong> It includes the <code>ESP32 Coder</code> folder. Extract it, for example, to <code>C:\Dev\ESP32 Coder\</code>and run <code>esp32coder.exe</code> inside it. <strong>The separate EXE is for auto-updates.</strong> <a href="docs-en.html#install">Installation guide ↗</a></div><div class="download-tags"><span>WINDOWS x64</span><span>PORTABLE ZIP</span><span>GITHUB RELEASES</span></div><a class="download-all" href="https://github.com/RAAMVZ/ESP32-Coder/releases" id="all-releases">Browse all releases ↗</a></div><div aria-live="polite" class="release-panel"><div class="release-top"><span>LATEST RELEASE</span><span class="release-dot"></span></div><strong id="release-version">—</strong><p id="release-status">Checking GitHub Releases…</p><a class="btn btn-primary" href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest" id="download-latest">Open latest release on GitHub ↗</a><div class="release-meta" id="release-meta"></div><small>Install from ZIP; the separate EXE is for auto-updates.</small></div></div></section>
 <section class="section container faq-section feed-stage" id="faq"><div class="section-head"><div class="eyebrow">GOOD TO KNOW</div><h2>Before you get started</h2></div><div class="faq-grid"><details><summary>Do I need Arduino IDE or VS Code?</summary><p>No. ESP32 Coder is a standalone Windows app. Required SDKs and toolchains can be installed from its interface.</p></details><details><summary>Can I flash a BIN without the source code?</summary><p>Yes, if you have a ready-made BIN that matches the target board and its flash layout.</p></details><details><summary>Can LittleFS be flashed independently?</summary><p>Yes. A separate mode writes a prepared LittleFS filesystem image. Use the correct partition address and layout.</p></details><details><summary>Are ESP32-S3 and ESP32-C3 supported?</summary><p>The app includes ESP32 board families such as ESP32-S3 and ESP32-C3. Available configurations depend on installed components.</p></details><details><summary>Where can I find updates?</summary><p>Download the latest GitHub Release or use the app’s signed-update check.</p></details></div></section>
 </main>
 <nav aria-label="Section navigation" class="feed-nav">
@@ -170,5 +170,5 @@
 <a aria-label="Download" href="#download" title="Download"><span class="feed-nav-dot"></span><span class="feed-nav-text">Download</span></a>
 <a aria-label="FAQ" href="#faq" title="FAQ"><span class="feed-nav-dot"></span><span class="feed-nav-text">FAQ</span></a>
 </nav>
-<footer class="site-footer"><div class="container footer-inner"><a class="footer-brand" href="./"><img alt="ESP32 Coder" class="footer-brand-logo" height="544" src="assets/esp32coder-logo.png" width="2048"/></a><p>ESP32 Coder — a focused workspace for ESP32 development.</p><div class="footer-links"><a href="docs-en.html">Docs</a><a data-repo-link="releases" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases">All releases</a><a data-repo-link="repo" href="https://github.com/RAAMVZ/ESP32-Coder-Releases">GitHub</a><a href="#top">Back to top ↑</a></div></div></footer>
+<footer class="site-footer"><div class="container footer-inner"><a class="footer-brand" href="./"><img alt="ESP32 Coder" class="footer-brand-logo" height="512" src="assets/ESP32Coder.png" width="512"/></a><p>ESP32 Coder — a focused workspace for ESP32 development</p><div class="footer-links"><a href="docs-en.html">Docs</a><a data-repo-link="releases" href="https://github.com/RAAMVZ/ESP32-Coder/releases">All releases</a><a data-repo-link="repo" href="https://github.com/RAAMVZ/ESP32-Coder">GitHub</a><a href="#top">Back to top ↑</a></div></div></footer>
 </body></html>
