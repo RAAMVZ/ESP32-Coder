@@ -2,30 +2,31 @@
 
 <html lang="en"><head>
 <meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Docs — Getting Started and Project Imports | ESP32 Coder</title>
+<title>Documentation | ESP32 Coder - an easy-to-use environment for ESP32 programming</title>
 <meta content="Set up ESP32 Coder in a dedicated folder, install SDK, and import Arduino IDE, PlatformIO and native Coder projects." name="description"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/docs-en.html" rel="canonical"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/docs-ru.html" hreflang="ru" rel="alternate"/>
-<link href="https://raamvz.github.io/ESP32-Coder-Releases/docs-en.html" hreflang="en" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder/docs-en.html" rel="canonical"/>
+<link href="https://raamvz.github.io/ESP32-Coder/docs-ru.html" hreflang="ru" rel="alternate"/>
+<link href="https://raamvz.github.io/ESP32-Coder/docs-en.html" hreflang="en" rel="alternate"/>
 <link href="assets/favicon.png" rel="icon" type="image/png"/>
 <link href="style.css" rel="stylesheet"/>
+<script defer src="site-config.js"></script><script defer src="docs-version.js"></script>
 </head><body id="top">
 <div aria-hidden="true" class="ambient ambient-a"></div><div aria-hidden="true" class="ambient ambient-b"></div>
 <header class="site-header"><div class="container header-inner">
 <a aria-label="ESP32 Coder" class="brand" href="en.html"><img alt="ESP32 Coder" class="brand-logo-full" height="544" src="assets/esp32coder-logo.png" width="2048"/></a>
 <nav aria-label="Navigation" class="main-nav docs-top-nav"><a href="en.html">Home</a><a href="#first-run">Quick start</a><a href="#arduino">Arduino IDE</a><a href="#platformio">PlatformIO</a></nav>
-<a class="nav-download" href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">Download ↗</a>
+<a class="nav-download" href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">Download ↗</a>
 </div></header>
 <main class="docs-page"><section class="container docs-hero">
 <div class="docs-breadcrumb"><a href="en.html">Home</a><span>/</span><span>Docs</span></div>
-<div class="eyebrow">GUIDE / ESP32 CODER v1.1.5</div>
+<div class="eyebrow">GUIDE / ESP32 CODER <span class="wver" data-doc-version>Checking version…</span></div>
 <h1>Get started <em>without a complex setup</em></h1>
 <p>A practical guide to first launch, native ESP32 Coder projects, and importing Arduino IDE and PlatformIO projects.</p>
 
 </section><div class="container docs-layout"><aside class="docs-sidebar"><div class="docs-sidebar-title">ON THIS PAGE</div><a href="#install">01 · Install</a><a href="#first-run">02 · First launch</a><a href="#coder-project">03 · Native project</a><a href="#arduino">04 · Arduino IDE import</a><a href="#platformio">05 · PlatformIO import</a><a href="#libraries-doc">06 · Libraries</a><a href="#build-upload">07 · Build &amp; flash</a><a href="#troubleshooting">08 · Troubleshooting</a></aside><div class="docs-body">
 <section class="docs-section" id="install"><div class="docs-step">01 / INSTALLATION</div><h2>Run from a dedicated folder</h2>
-<div class="docs-notice"><strong>We recommend downloading the ZIP archive containing the <code>ESP32 Coder</code> folder.</strong> On the <a href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">latest GitHub release page</a>, choose the ZIP file. The separate <code>.exe</code> release asset is intended for automatic updates. Never run the app directly from the archive or a temporary directory: components, caches, projects, and settings need a permanent writable folder.</div>
-<ol><li>Open the <a href="https://github.com/RAAMVZ/ESP32-Coder-Releases/releases/latest">latest ESP32 Coder release</a> and download the <strong>ZIP archive</strong>.</li><li>Create a permanent parent folder, such as <code>C:\Dev\</code>, preferably outside OneDrive.</li><li>Extract the complete <strong><code>ESP32 Coder</code> folder</strong> from the ZIP into it. The app will be at <code>C:\Dev\ESP32 Coder\</code>.</li><li>Run <code>esp32coder.exe</code> from that folder. Keep the entire working directory together; the standalone EXE release asset is reserved for the automatic update workflow.</li></ol>
+<div class="docs-notice"><strong>We recommend downloading the ZIP archive containing the <code>ESP32 Coder</code> folder.</strong> On the <a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">latest GitHub release page</a>, choose the ZIP file. The separate <code>.exe</code> release asset is intended for automatic updates. Never run the app directly from the archive or a temporary directory: components, caches, projects, and settings need a permanent writable folder.</div>
+<ol><li>Open the <a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">latest ESP32 Coder release</a> and download the <strong>ZIP archive</strong>.</li><li>Create a permanent parent folder, such as <code>C:\Dev\</code>, preferably outside OneDrive.</li><li>Extract the complete <strong><code>ESP32 Coder</code> folder</strong> from the ZIP into it. The app will be at <code>C:\Dev\ESP32 Coder\</code>.</li><li>Run <code>esp32coder.exe</code> from that folder. Keep the entire working directory together; the standalone EXE release asset is reserved for the automatic update workflow.</li></ol>
 <pre class="docs-tree"><code>C:\Dev\ESP32 Coder\
 ├── esp32coder.exe
 ├── runtime\          (components)
@@ -33,14 +34,14 @@
 │   └── MyProject1\
 │       ├── libs\
 │       ├── MyProject1.cpp
-│       └── esp32studio.ini
+│       └── esp32coder.ini
 └── build_temp\       (may be created on build)</code></pre><p class="docs-muted">The build_temp directory is normally created alongside the app when building. For Unicode or OneDrive paths, Coder may relocate temporary build files to a local Windows directory.</p>
 <p class="docs-muted">Avoid Program Files unless the directory is writable. ESP32 Coder creates Projects automatically.</p></section>
 <section class="docs-section" id="first-run"><div class="docs-step">02 / CONFIGURATION</div><h2>Select a board and install components</h2>
 <ol><li>Launch ESP32 Coder and choose your board from <strong>Board / Port</strong>. Use <strong>ESP32 Dev Module</strong> for the examples.</li><li>Open <strong>Components</strong> and install the required <strong>SDK/Arduino Core and toolchain</strong> for the selected board.</li><li>If required, open <strong>Libraries</strong> and install any missing external dependencies.</li><li>Connect your board using a data-capable USB cable and select its COM port.</li></ol>
 <p class="docs-muted">An internet connection is needed for the initial component download. Once installed, local editing, compilation and flashing can work offline.</p></section>
 <section class="docs-section" id="coder-project"><div class="docs-step">03 / NATIVE PROJECT</div><h2>Open a native ESP32 Coder example</h2>
-<p>The <strong>ESP32_Smart_Monitor</strong> example contains eight source files for a Wi-Fi access point, a small HTTP/JSON status endpoint, ADC sampling, and Preferences-based settings. Its ZIP now includes <code>esp32studio.ini</code> and <code>libs/</code>, which make it a native Coder project.</p>
+<p>The <strong>ESP32_Smart_Monitor</strong> example contains eight source files for a Wi-Fi access point, a small HTTP/JSON status endpoint, ADC sampling, and Preferences-based settings. Its ZIP now includes <code>esp32coder.ini</code> and <code>libs/</code>, which make it a native Coder project.</p>
 <pre class="docs-tree"><code>ESP32_Smart_Monitor/
 ├── libs/                ← project-local libraries
 ├── ESP32_Smart_Monitor.cpp
@@ -51,7 +52,7 @@
 ├── WebDashboard.cpp
 ├── SettingsStore.h
 ├── SettingsStore.cpp
-└── esp32studio.ini      ← project configuration</code></pre><p class="docs-muted">Coder creates the project folder and libs/, but not src/ or include/. The source and header files in this example sit directly in the project root.</p>
+└── esp32coder.ini      ← project configuration</code></pre><p class="docs-muted">Coder creates the project folder and libs/, but not src/ or include/. The source and header files in this example sit directly in the project root.</p>
 <ol><li><a download="" href="assets/ESP32_Smart_Monitor_Coder.zip">Download the native ESP32 Coder project ↓</a>.</li><li>Extract <code>ESP32_Smart_Monitor</code> into <code>C:\Dev\ESP32 Coder\Projects\</code> or another permanent workspace.</li><li>In Coder, choose <strong>Open → Open project</strong> and select <code>ESP32_Smart_Monitor</code>.</li><li>Select ESP32 Dev Module and choose <strong>Check</strong> or <strong>Build</strong>.</li></ol>
 <div class="docs-note">The example uses ADC input <code>GPIO34</code> on a classic ESP32 Dev Module. Change the pin for ESP32-S3/C3 and other boards; verify hardware compatibility. Hardware testing of this example has not been performed.</div>
 <h3>Expected Serial Monitor output (115200 baud)</h3>
@@ -73,7 +74,7 @@ ADC: 1.68 V | Avg: 1.54 V</code></pre>
 void setup() { Serial.begin(115200); pinMode(LED_PIN, OUTPUT); }
 void loop() { digitalWrite(LED_PIN, HIGH); delay(500); digitalWrite(LED_PIN, LOW); delay(500); }</code></pre>
 <ol><li><a download="" href="assets/Arduino_Import_Example.zip">Download the Arduino import example ↓</a> and extract it <strong>outside</strong> Coder's Projects directory.</li><li>Choose <strong>Open → Import Arduino IDE project</strong>.</li><li>Select the <code>Arduino_Blink_Serial</code> <strong>folder</strong> containing the .ino file.</li><li>Set a new project name and confirm. The imported project appears under <code>Projects/</code>.</li><li>Confirm the board and dependencies, then choose <strong>Check</strong> or <strong>Build</strong>.</li></ol>
-<div class="docs-note">Coder adapts Arduino sketch sources for C++ compilation and creates a native <code>esp32studio.ini</code>. Your Arduino IDE original is left unchanged.</div></section>
+<div class="docs-note">Coder adapts Arduino sketch sources for C++ compilation and creates a native <code>esp32coder.ini</code>. Your Arduino IDE original is left unchanged.</div></section>
 <section class="docs-section" id="platformio"><div class="docs-step">05 / PLATFORMIO IMPORT</div><h2>Import a PlatformIO project</h2>
 <p>Select the <strong>root project folder</strong> containing <code>platformio.ini</code>, not <code>src/</code> by itself.</p>
 <p>This is the original PlatformIO layout, not the resulting Coder project:</p><pre class="docs-tree"><code>PlatformIO_Blink_Serial/
@@ -81,14 +82,14 @@ void loop() { digitalWrite(LED_PIN, HIGH); delay(500); digitalWrite(LED_PIN, LOW
 ├── src/
 │   └── main.cpp
 └── include/
-    └── BlinkConfig.h</code></pre><p>After importing into Coder, main.cpp and BlinkConfig.h are placed in the new project root; Coder also creates esp32studio.ini and libs/.</p>
+    └── BlinkConfig.h</code></pre><p>After importing into Coder, main.cpp and BlinkConfig.h are placed in the new project root; Coder also creates esp32coder.ini and libs/.</p>
 <pre class="docs-code"><code>[env:esp32dev]
 platform = espressif32
 board = esp32dev
 framework = arduino
 monitor_speed = 115200</code></pre>
 <ol><li><a download="" href="assets/PlatformIO_Import_Example.zip">Download the PlatformIO import example ↓</a> and extract it outside the Coder workspace.</li><li>Choose <strong>Open → Import PlatformIO project</strong>.</li><li>Select the <code>PlatformIO_Blink_Serial</code> folder with <code>platformio.ini</code>.</li><li>Confirm the new name. Coder copies source files, compatible board settings and dependency information into a native project.</li><li>Confirm the board and libraries, then choose <strong>Build</strong>.</li></ol>
-<div class="docs-note"><code>platformio.ini</code> is read for settings but is not copied into the Coder project. Coder creates <code>esp32studio.ini</code> instead. Local <code>lib/</code> libraries and available <code>.pio/libdeps/</code> caches may be copied into <code>libs/</code>; install any missing libraries separately.</div></section>
+<div class="docs-note"><code>platformio.ini</code> is read for settings but is not copied into the Coder project. Coder creates <code>esp32coder.ini</code> instead. Local <code>lib/</code> libraries and available <code>.pio/libdeps/</code> caches may be copied into <code>libs/</code>; install any missing libraries separately.</div></section>
 <section class="docs-section" id="libraries-doc"><div class="docs-step">06 / DEPENDENCIES</div><h2>Libraries per project</h2>
 <p>Each project has its own <code>libs/</code> folder. Use <strong>Libraries</strong> to find and install libraries from GitHub, import or update dependencies, or copy libraries from your Arduino IDE's shared library directory. Dependency analysis helps identify which libraries your project needs.</p>
 <p>The sample projects above use libraries supplied by the ESP32 Arduino Core and need no extra third-party packages.</p></section>
@@ -100,5 +101,5 @@ monitor_speed = 115200</code></pre>
 <details><summary>Importer cannot find .ino or platformio.ini</summary><p>Select the project root: a folder containing the main .ino for Arduino IDE or platformio.ini for PlatformIO.</p></details>
 <details><summary>COM port missing</summary><p>Check the USB cable, USB-UART driver and whether another serial monitor has claimed the port. Refresh the port list.</p></details>
 <details><summary>Projects or cache do not persist</summary><p>Run the unpacked application from a dedicated writable folder, never from the ZIP or a temporary archive directory.</p></details>
-</section></div></div></main><footer class="site-footer"><div class="container footer-inner"><a class="footer-brand" href="en.html"><img alt="ESP32 Coder" class="footer-brand-logo" height="544" src="assets/esp32coder-logo.png" width="2048"/></a><p>Documentation · ESP32 Coder v1.1.5</p><div class="footer-links"><a href="en.html">Home</a><a href="#top">Back to top ↑</a></div></div></footer>
+</section></div></div></main><footer class="site-footer"><div class="container footer-inner"><a class="footer-brand" href="en.html"><img alt="ESP32 Coder" class="footer-brand-logo" height="512" src="assets/ESP32Coder.png" width="512"/></a><div class="footer-copy"><p>ESP32 Coder — a focused workspace for ESP32 development</p><p class="docs-footer-meta">Documentation · ESP32 Coder <span class="wver" data-doc-version>Checking version…</span></p></div><div class="footer-links"><a href="en.html">Home</a><a href="#top">Back to top ↑</a></div></div></footer>
 </body></html>
