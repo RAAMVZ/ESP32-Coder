@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://raamvz.github.io/ESP32-Coder-Releases/sitemap.xml
+Sitemap: https://raamvz.github.io/ESP32-Coder/sitemap.xml
