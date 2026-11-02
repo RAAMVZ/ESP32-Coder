@@ -2154,3 +2154,72 @@ html.feed-page .benefit-card-updates>.benefit-symbol{
   html.feed-page .benefits-grid{gap:8px;grid-template-rows:repeat(2,minmax(0,1fr)) 84px}
   html.feed-page .benefits-grid .benefit-card-updates{padding-block:9px}
 }
+
+/* Improved readability of secondary text on the light website */
+.hero-intro,.section-head p,.benefit-card p,.library-line p,.libraries-spotlight p,
+.flash-card p,.flash-bottom,.step-card p,.docs-section p,.docs-muted,.docs-hero p,
+.docs-note,.docs-notice,.footer-inner p,.footer-links a,.release-meta,
+.screenshot-caption,.download-folder-hint,.docs-sidebar a {
+ color:#172b35;font-size:15px;line-height:1.6;
+}
+html.feed-page .section-head p,html.feed-page .benefit-card p,
+html.feed-page .library-line p,html.feed-page .libraries-spotlight p {font-size:15px;color:#172b35;}
+.footer-brand img.footer-brand-logo {max-width:235px;width:100%;height:auto;object-fit:contain;}
+
+
+/* Site-wide black typography and project icon footer · 2026-11-02 */
+/* The page backgrounds are light. All standard/secondary grey type is now black. */
+:root{
+  --ink:#000000;
+  --ink-2:#000000;
+  --muted:#000000;
+}
+body,body .main-nav a,body .footer-inner p,body .footer-links a,
+body .hero-art.hero-screenshot .mini-label,body .screenshot-caption,
+body .release-meta,body .rail-grid>div span,body .rail-grid>div.rail-final,
+body .hero-intro,body .hero-live-release,body .hero-download-note,
+body .section-head p,body .audience-card>span:last-child,
+body .benefit-card p,body .benefit-card-updates .benefit-update-copy p,
+body .libraries-spotlight p,body .library-line p,
+body .flash-card p,body .flash-bottom,body .stance-text>p,
+body .step-card p,body .download-content>p,body .download-folder-hint,
+body .release-panel p,body .release-panel small,
+body .docs-breadcrumb,body .docs-hero>p,body .docs-sidebar a,
+body .docs-section p,body .docs-section ul,body .docs-section ol,
+body .docs-section p.docs-muted,body .docs-note,body .docs-notice,
+body .docs-teaser-card p,body .docs-action-grid p,
+body .faq-grid details:not([open]) p{
+  color:#000000;
+}
+/* The FAQ's dark flip face stays white for legibility, not grey. */
+body .faq-grid details[open] p,
+body html.feed-page .faq-grid details[open] p {color:#ffffff;}
+/* Keep colored syntax in code previews and dark app screenshots unchanged. */
+/* Footer artwork: uploaded transparent ESP32Coder.png, without the old dark plaque. */
+.footer-brand img.footer-brand-logo,
+.brand img.footer-brand-logo{
+  width:82px;
+  height:82px;
+  max-width:82px;
+  max-height:82px;
+  object-fit:contain;
+  background:transparent;
+  padding:0;
+  border-radius:0;
+  box-shadow:none;
+  filter:none;
+}
+.footer-brand{flex:0 0 auto;}
+.footer-inner{min-height:126px;}
+.footer-inner p{font-size:15px;line-height:1.5;}
+.footer-links a{font-size:14px;}
+@media(max-width:680px){
+  .footer-brand img.footer-brand-logo{width:70px;height:70px;max-width:70px;max-height:70px;padding:0;}
+}
+
+/* Consistent footer tagline on landing and Docs pages (with live Docs version below). */
+.footer-copy{min-width:0;}
+.footer-copy p{color:#000;line-height:1.5;}
+.footer-copy .docs-footer-meta{margin-top:5px;font-size:13px;}
+@media(max-width:950px){.footer-copy{flex:1 1 58%;}}
+@media(max-width:680px){.footer-copy{flex-basis:auto;}}
