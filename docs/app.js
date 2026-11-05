@@ -23,6 +23,7 @@
     open:'Open latest release on GitHub ↗',
     size:'ZIP size',date:'Published',nozip:'No ZIP asset was found in this release — check its GitHub files.'
   };
+  const fallbackVersion=/^v?\d+\.\d+\.\d+(?:[-+][\w.-]+)?$/.test(String(config.publishedVersion||'')) ? (String(config.publishedVersion).startsWith('v')?String(config.publishedVersion):'v'+String(config.publishedVersion)) : 'v1.1.7';
   const root=match ? `https://github.com/${match[1]}/${match[2]}` : 'https://github.com/RAAMVZ/ESP32-Coder';
   const latestUrl=`${root}/releases/latest`;
   const releasesUrl=`${root}/releases`;
@@ -34,6 +35,9 @@
     meta:document.getElementById('release-meta'),
     all:document.getElementById('all-releases')
   };
+  // Display the last confirmed release immediately; network lookup refines it.
+  if(elements.version)elements.version.textContent=fallbackVersion;
+  document.querySelectorAll('[data-latest-version]').forEach(el=>{el.textContent=fallbackVersion;});
   document.querySelectorAll('[data-repo-link]').forEach(link=>{
     link.href=link.getAttribute('data-repo-link')==='repo' ? root : releasesUrl;
   });
@@ -42,7 +46,7 @@
   if(elements.all)elements.all.href=releasesUrl;
   if(elements.button){elements.button.href=latestUrl;elements.button.textContent=text.open;}
   if(elements.hero)elements.hero.href=latestUrl;
-  if(!match){if(elements.status)elements.status.textContent=text.fail;document.querySelectorAll('[data-latest-version]').forEach(el=>el.textContent=locale==='ru'?'Посмотреть на GitHub':'View on GitHub');return;}
+  if(!match){if(elements.status)elements.status.textContent=text.fail;return;}
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),8000);
   fetch(`https://api.github.com/repos/${match[1]}/${match[2]}/releases/latest`,{
@@ -54,7 +58,7 @@
     return response.json();
   })
   .then(release=>{
-    if(!release){if(elements.status)elements.status.textContent=text.empty;document.querySelectorAll('[data-latest-version]').forEach(el=>el.textContent=locale==='ru'?'Посмотреть на GitHub':'View on GitHub');return;}
+    if(!release){if(elements.status)elements.status.textContent=text.empty;return;}
     const tag=String(release.tag_name||'');
     if(elements.version)elements.version.textContent=tag||'—';
     document.querySelectorAll('[data-latest-version]').forEach(el=>{el.textContent=tag||'GitHub';el.href=latestUrl;});
@@ -68,7 +72,7 @@
     if(elements.meta)elements.meta.textContent=parts.join(' · ');
     if(!zip && elements.status)elements.status.textContent=text.nozip;
   })
-  .catch(()=>{if(elements.status)elements.status.textContent=text.fail;document.querySelectorAll('[data-latest-version]').forEach(el=>el.textContent=locale==='ru'?'Посмотреть на GitHub':'View on GitHub');})
+  .catch(()=>{if(elements.status)elements.status.textContent=text.fail;})
   .finally(()=>clearTimeout(timeout));
 })();
 
