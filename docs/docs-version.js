@@ -1,15 +1,37 @@
-/* Dynamically show the latest published stable GitHub release on Docs pages. */
+/* Current release number for RU/EN documentation.
+ * Keep a publication-time fallback: rate limits, browser blockers or a transient
+ * GitHub API failure must not replace a valid version with 'unavailable'.
+ */
 (()=>{
-  const nodes=document.querySelectorAll('[data-doc-version]');
+  'use strict';
+  const nodes=[...document.querySelectorAll('[data-doc-version]')];
   if(!nodes.length)return;
-  const repo=(window.ESP32_SITE_CONFIG&&window.ESP32_SITE_CONFIG.repository)||'RAAMVZ/ESP32-Coder';
-  const tag=/^[A-Za-z0-9-]+\/[A-Za-z0-9_.-]+$/.test(repo)?repo:'RAAMVZ/ESP32-Coder';
-  fetch(`https://api.github.com/repos/${tag}/releases/latest`,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'})
-    .then(response=>{if(!response.ok)throw new Error('GitHub '+response.status);return response.json()})
-    .then(data=>{
-      const version=String(data.tag_name||'').trim();
-      if(!/^v?\d+\.\d+\.\d+(?:[-+][\w.-]+)?$/.test(version))throw new Error('Release tag missing');
-      nodes.forEach(el=>el.textContent=version.startsWith('v')?version:'v'+version);
-    })
-    .catch(()=>nodes.forEach(el=>el.textContent=el.closest('html')?.lang==='en'?'version unavailable':'версия недоступна'));
+  const settings=window.ESP32_SITE_CONFIG||{};
+  const validVersion=/^v?\d+\.\d+\.\d+(?:[-+][\w.-]+)?$/;
+  const normalized=v=>{
+    const s=String(v||'').trim();
+    return validVersion.test(s)?(s.startsWith('v')?s:'v'+s):null;
+  };
+  const fallback=normalized(settings.publishedVersion)||'v1.1.7';
+  const render=version=>nodes.forEach(el=>{el.textContent=version;});
+  render(fallback);
+
+  const repo=String(settings.repository||'RAAMVZ/ESP32-Coder');
+  if(!/^[A-Za-z0-9-]{1,39}\/[A-Za-z0-9_.-]{1,100}$/.test(repo))return;
+  const controller=typeof AbortController==='function'?new AbortController():null;
+  const timeout=controller?setTimeout(()=>controller.abort(),8000):null;
+  fetch(`https://api.github.com/repos/${repo}/releases/latest`,{
+    headers:{Accept:'application/vnd.github+json'},
+    cache:'default',
+    ...(controller?{signal:controller.signal}:{})
+  }).then(response=>{
+    if(!response.ok)throw new Error('GitHub '+response.status);
+    return response.json();
+  }).then(data=>{
+    const live=normalized(data.tag_name);
+    if(live)render(live);
+  }).catch(()=>{
+    // A temporary outage or GitHub API rate limit is not a missing release.
+    // Leave the last known published version visible.
+  }).finally(()=>{if(timeout!==null)clearTimeout(timeout);});
 })();
