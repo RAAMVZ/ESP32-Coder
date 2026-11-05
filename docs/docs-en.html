@@ -2,19 +2,19 @@
 
 <html lang="en"><head>
 <meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>ESP32 Coder Docs — Install, Arduino IDE &amp; PlatformIO Import</title>
-<meta name="description" content="ESP32 Coder setup guide: install the free Windows ESP32 IDE, select a board, import Arduino IDE and PlatformIO projects, manage libraries, build and flash firmware.">
+<title>ESP32 Coder Docs — Import Arduino Libraries, libs Cleanup &amp; Build</title>
+<meta name="description" content="ESP32 Coder guide: import Arduino IDE libraries into project-local libs, automatically remove unused libraries after the first successful build, configure new projects, compile and flash ESP32.">
 <link href="https://raamvz.github.io/ESP32-Coder/docs-en.html" rel="canonical"/>
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ESP32 Coder">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="ESP32 Coder Docs — Install, Arduino IDE &amp; PlatformIO Import">
-<meta property="og:description" content="ESP32 Coder setup guide: install the free Windows ESP32 IDE, select a board, import Arduino IDE and PlatformIO projects, manage libraries, build and flash firmware.">
+<meta property="og:title" content="ESP32 Coder Docs — Import Arduino Libraries, libs Cleanup &amp; Build">
+<meta property="og:description" content="ESP32 Coder guide: import Arduino IDE libraries into project-local libs, automatically remove unused libraries after the first successful build, configure new projects, compile and flash ESP32.">
 <meta property="og:url" content="https://raamvz.github.io/ESP32-Coder/docs-en.html">
 <meta property="og:image" content="https://raamvz.github.io/ESP32-Coder/assets/social-preview.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ESP32 Coder Docs — Install, Arduino IDE &amp; PlatformIO Import">
-<meta name="twitter:description" content="ESP32 Coder setup guide: install the free Windows ESP32 IDE, select a board, import Arduino IDE and PlatformIO projects, manage libraries, build and flash firmware.">
+<meta name="twitter:title" content="ESP32 Coder Docs — Import Arduino Libraries, libs Cleanup &amp; Build">
+<meta name="twitter:description" content="ESP32 Coder guide: import Arduino IDE libraries into project-local libs, automatically remove unused libraries after the first successful build, configure new projects, compile and flash ESP32.">
 <meta name="twitter:image" content="https://raamvz.github.io/ESP32-Coder/assets/social-preview.png">
 <link href="https://raamvz.github.io/ESP32-Coder/docs-ru.html" hreflang="ru" rel="alternate"/>
 <link href="https://raamvz.github.io/ESP32-Coder/docs-en.html" hreflang="en" rel="alternate"/>
@@ -36,7 +36,7 @@
 <h1>Get started <em>without a complex setup</em></h1>
 <p>A practical guide to first launch, native ESP32 Coder projects, and importing Arduino IDE and PlatformIO projects.</p>
 
-</section><div class="container docs-layout"><aside class="docs-sidebar"><div class="docs-sidebar-title">ON THIS PAGE</div><a href="#install">01 · Install</a><a href="#first-run">02 · First launch</a><a href="#coder-project">03 · Native project</a><a href="#arduino">04 · Arduino IDE import</a><a href="#platformio">05 · PlatformIO import</a><a href="#libraries-doc">06 · Libraries</a><a href="#build-upload">07 · Build &amp; flash</a><a href="#troubleshooting">08 · Troubleshooting</a></aside><div class="docs-body">
+</section><div class="container docs-layout"><aside class="docs-sidebar"><div class="docs-sidebar-title">ON THIS PAGE</div><a href="#install">01 · Install</a><a href="#first-run">02 · First launch</a><a href="#coder-project">03 · Native project</a><a href="#arduino">04 · Arduino IDE import</a><a href="#platformio">05 · PlatformIO import</a><a href="#libraries-doc">06 · Import &amp; clean libs</a><a href="#build-upload">07 · Build &amp; flash</a><a href="#troubleshooting">08 · Troubleshooting</a></aside><div class="docs-body">
 <section class="docs-section" id="install"><div class="docs-step">01 / INSTALLATION</div><h2>Run from a dedicated folder</h2>
 <div class="docs-notice"><strong>We recommend downloading the ZIP archive containing the <code>ESP32 Coder</code> folder.</strong> On the <a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">latest GitHub release page</a>, choose the ZIP file. The separate <code>.exe</code> release asset is intended for automatic updates. Never run the app directly from the archive or a temporary directory: components, caches, projects, and settings need a permanent writable folder.</div>
 <ol><li>Open the <a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">latest ESP32 Coder release</a> and download the <strong>ZIP archive</strong>.</li><li>Create a permanent parent folder, such as <code>C:\Dev\</code>, preferably outside OneDrive.</li><li>Extract the complete <strong><code>ESP32 Coder</code> folder</strong> from the ZIP into it. The app will be at <code>C:\Dev\ESP32 Coder\</code>.</li><li>Run <code>esp32coder.exe</code> from that folder. Keep the entire working directory together; the standalone EXE release asset is reserved for the automatic update workflow.</li></ol>
@@ -65,7 +65,7 @@
 ├── WebDashboard.cpp
 ├── SettingsStore.h
 ├── SettingsStore.cpp
-└── esp32coder.ini      ← project configuration</code></pre><p class="docs-muted">Coder creates the project folder and libs/, but not src/ or include/. The source and header files in this example sit directly in the project root.</p>
+└── esp32coder.ini      ← project configuration</code></pre><p class="docs-muted">Coder creates the project folder and libs/, but not src/ or include/. The source and header files in this example sit directly in the project root.</p><p>New projects can use the same <a href="#libraries-new">automatic library cleanup</a>: after a successful build, Coder keeps the used libraries and their dependencies in <code>libs/</code>.</p>
 <ol><li><a download="" href="assets/ESP32_Smart_Monitor_Coder.zip">Download the native ESP32 Coder project ↓</a>.</li><li>Extract <code>ESP32_Smart_Monitor</code> into <code>C:\Dev\ESP32 Coder\Projects\</code> or another permanent workspace.</li><li>In Coder, choose <strong>Open → Open project</strong> and select <code>ESP32_Smart_Monitor</code>.</li><li>Select ESP32 Dev Module and choose <strong>Check</strong> or <strong>Build</strong>.</li></ol>
 <div class="docs-note">The example uses ADC input <code>GPIO34</code> on a classic ESP32 Dev Module. Change the pin for ESP32-S3/C3 and other boards; verify hardware compatibility. Hardware testing of this example has not been performed.</div>
 <h3>Expected Serial Monitor output (115200 baud)</h3>
@@ -87,7 +87,7 @@ ADC: 1.68 V | Avg: 1.54 V</code></pre>
 void setup() { Serial.begin(115200); pinMode(LED_PIN, OUTPUT); }
 void loop() { digitalWrite(LED_PIN, HIGH); delay(500); digitalWrite(LED_PIN, LOW); delay(500); }</code></pre>
 <ol><li><a download="" href="assets/Arduino_Import_Example.zip">Download the Arduino import example ↓</a> and extract it <strong>outside</strong> Coder's Projects directory.</li><li>Choose <strong>Open → Import Arduino IDE project</strong>.</li><li>Select the <code>Arduino_Blink_Serial</code> <strong>folder</strong> containing the .ino file.</li><li>Set a new project name and confirm. The imported project appears under <code>Projects/</code>.</li><li>Confirm the board and dependencies, then choose <strong>Check</strong> or <strong>Build</strong>.</li></ol>
-<div class="docs-note">Coder adapts Arduino sketch sources for C++ compilation and creates a native <code>esp32coder.ini</code>. Your Arduino IDE original is left unchanged.</div></section>
+<div class="docs-note">Coder adapts Arduino sketch sources for C++ compilation and creates a native <code>esp32coder.ini</code>. Your Arduino IDE original is left unchanged.</div><p>For larger Arduino sketches, you can <a href="#libraries-doc">copy the shared Arduino libraries into <code>libs/</code> and automatically prune unused libraries after a successful build</a>. This also works for new projects.</p></section>
 <section class="docs-section" id="platformio"><div class="docs-step">05 / PLATFORMIO IMPORT</div><h2>Import a PlatformIO project</h2>
 <p>Select the <strong>root project folder</strong> containing <code>platformio.ini</code>, not <code>src/</code> by itself.</p>
 <p>This is the original PlatformIO layout, not the resulting Coder project:</p><pre class="docs-tree"><code>PlatformIO_Blink_Serial/
@@ -103,9 +103,50 @@ framework = arduino
 monitor_speed = 115200</code></pre>
 <ol><li><a download="" href="assets/PlatformIO_Import_Example.zip">Download the PlatformIO import example ↓</a> and extract it outside the Coder workspace.</li><li>Choose <strong>Open → Import PlatformIO project</strong>.</li><li>Select the <code>PlatformIO_Blink_Serial</code> folder with <code>platformio.ini</code>.</li><li>Confirm the new name. Coder copies source files, compatible board settings and dependency information into a native project.</li><li>Confirm the board and libraries, then choose <strong>Build</strong>.</li></ol>
 <div class="docs-note"><code>platformio.ini</code> is read for settings but is not copied into the Coder project. Coder creates <code>esp32coder.ini</code> instead. Local <code>lib/</code> libraries and available <code>.pio/libdeps/</code> caches may be copied into <code>libs/</code>; install any missing libraries separately.</div></section>
-<section class="docs-section" id="libraries-doc"><div class="docs-step">06 / DEPENDENCIES</div><h2>Libraries per project</h2>
-<p>Each project has its own <code>libs/</code> folder. Use <strong>Libraries</strong> to find and install libraries from GitHub, import or update dependencies, or copy libraries from your Arduino IDE's shared library directory. Dependency analysis helps identify which libraries your project needs.</p>
-<p>The sample projects above use libraries supplied by the ESP32 Arduino Core and need no extra third-party packages.</p></section>
+<section class="docs-section" id="libraries-doc"><div class="docs-step">06 / LIBRARIES &amp; DEPENDENCIES</div><h2>Import Arduino libraries into libs and remove unused packages</h2>
+<p>ESP32 Coder keeps third-party libraries <strong>inside each project</strong>. Every library has its own subfolder under <code>libs/</code>, alongside the source files and <code>esp32coder.ini</code>. This makes projects easier to move between computers without relying on a separate global Arduino IDE library installation.</p>
+<div class="docs-notice"><strong>Particularly useful for imported Arduino projects:</strong> copy libraries from your Arduino IDE collection into <code>libs/</code> first. After the <strong>first successful compilation</strong>, Coder automatically removes project libraries that are not used by the current code or required by other dependencies. The same workflow also works for <strong>new Coder projects</strong>.</div>
+<h3 id="libraries-import">1. Import libraries into a project</h3>
+<ol>
+<li><strong>Open or create a project</strong> in ESP32 Coder. If you are migrating an Arduino sketch, import the folder containing the main <code>.ino</code> first.</li>
+<li>Open <strong>Libraries</strong> and choose the Arduino IDE library-folder import. Select the <strong>shared folder containing individual library subfolders</strong>, for example <code>C:\Users\&lt;user&gt;\Documents\Arduino\libraries</code>, or your custom Arduino libraries location.</li>
+<li>Confirm and allow the copy to finish. Coder places the imported libraries <strong>in the current project's <code>libs/</code> directory</strong>, shows copy progress, and does not pre-filter all files by ESP32 architecture.</li>
+<li>Inspect <code>libs/</code> in the project tree. A normal copy-based import leaves the original Arduino IDE library directory unchanged.</li>
+</ol>
+<pre class="docs-tree"><code>Projects/
+└── MyProject1/
+    ├── MyProject1.cpp
+    ├── esp32coder.ini
+    └── libs/
+        ├── ArduinoJson/
+        ├── ESP_Async_WebServer/
+        ├── Async_TCP/
+        └── Some_Unused_Library/   ← initially copied too</code></pre>
+<p class="docs-muted">You can also install individual libraries through the Libraries manager, search GitHub, or copy library folders directly into <code>libs/</code>. Libraries already shipped with ESP32 Arduino Core usually do not need separate installation.</p>
+<h3 id="libraries-cleanup">2. What happens after the first successful build</h3>
+<ol>
+<li>Choose the target board and click <strong>Build</strong> (or complete a full <strong>Check</strong> that successfully compiles). Coder examines <code>#include</code> directives, library headers, and dependencies between libraries.</li>
+<li>Coder compiles and links the project. <strong>Cleanup runs only after successful compilation and linking</strong>, and after BIN generation for a Build operation. Libraries are not deleted when the operation fails or is cancelled.</li>
+<li>Libraries used directly or transitively are retained. Recognized unused library folders are removed <strong>from the project only</strong> (normally <code>libs/</code>; cleanup can also cover project-local <code>lib/</code> and <code>.pio/libdeps/</code>).</li>
+<li>The Output console shows <code>LIBRARY CLEANUP REPORT AFTER SUCCESSFUL VERIFY/BUILD</code>, including the number of libraries scanned, removed, and kept. You can reinstall or reimport a library later if needed.</li>
+</ol>
+<pre class="docs-tree"><code>MyProject1/
+├── MyProject1.cpp
+├── esp32coder.ini
+└── libs/
+    ├── ArduinoJson/
+    ├── ESP_Async_WebServer/
+    └── Async_TCP/       ← required dependency retained</code></pre>
+<div class="docs-note"><strong>Important:</strong> this is <strong>project library cleanup</strong>, not compiler cache cleaning. A library used only for another board configuration, future code, an external script, or a nonstandard dynamic inclusion might not be detected. Back up such libraries outside <code>libs/</code> before the first successful build. A normal copy-based import does not remove libraries from the shared Arduino IDE folder.</div>
+<h3 id="libraries-new">3. Use the same workflow for new projects</h3>
+<ol>
+<li>Create a new project, for example <code>MyProject2</code>. Coder creates the project folder and <code>libs/</code>.</li>
+<li>Add likely dependencies using <strong>Libraries</strong> or copy folders into <code>libs/</code>.</li>
+<li>Write your code with the necessary <code>#include</code> directives and complete the first successful Build.</li>
+<li>Review the cleanup report: Coder retains used libraries and their dependencies, removing the recognized extras.</li>
+</ol>
+<p>If you later add a new module or <code>#include</code>, install the missing library into <code>libs/</code> and build again. This keeps the project portable and avoids carrying your entire Arduino IDE library collection.</p>
+</section>
 <section class="docs-section" id="build-upload"><div class="docs-step">07 / DEVICE WORKFLOW</div><h2>Check, build and flash</h2>
 <div class="docs-action-grid"><div><strong>Check</strong><p>Inspect project configuration and dependencies without flashing.</p></div><div><strong>Build</strong><p>Compile and generate a firmware BIN.</p></div><div><strong>Upload</strong><p>Build and flash using the selected COM port.</p></div></div>
 <p>For debugging, open <strong>Serial Monitor and Plotter</strong>. Match its baud rate to <code>Serial.begin(...)</code>; these examples use <code>115200</code>.</p></section>
