@@ -38,7 +38,7 @@
     link.href=link.getAttribute('data-repo-link')==='repo' ? root : releasesUrl;
   });
   // Every Download CTA opens the release page, never a direct ZIP or EXE URL.
-  document.querySelectorAll('a.nav-download').forEach(link=>{link.href=latestUrl;});
+  document.querySelectorAll('a.nav-download').forEach(link=>{link.href=root;});
   if(elements.all)elements.all.href=releasesUrl;
   if(elements.button){elements.button.href=latestUrl;elements.button.textContent=text.open;}
   if(elements.hero)elements.hero.href=latestUrl;
