@@ -111,9 +111,9 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.03em}
   border-bottom:1px solid rgba(108,240,199,.08);
   box-shadow:0 1px 0 rgba(108,240,199,.04);
 }
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:25px;min-height:88px}
+.header-inner{display:flex;align-items:center;justify-content:flex-start;gap:25px;min-height:88px}
 
-.brand{display:flex;align-items:center;gap:0;min-width:280px}
+.brand{display:flex;align-items:center;gap:0;min-width:280px;flex:0 0 auto;margin-right:auto;justify-content:flex-start}
 .brand img.brand-logo-full{
   width:260px;height:auto;max-height:72px;object-fit:contain;object-position:left center;
   filter:drop-shadow(0 0 22px rgba(108,240,199,.30));
@@ -136,6 +136,8 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.03em}
 }
 .main-nav a:hover{color:var(--mint)}
 .main-nav a:hover::after{transform:scaleX(1)}
+
+.nav-download{margin-left:6px}
 
 .nav-download{
   display:inline-flex;align-items:center;gap:6px;
@@ -946,7 +948,7 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.03em}
 }
 
 @media(max-width:950px){
-  .brand{min-width:0}
+  .brand{min-width:0;margin-right:auto}
   .brand img.brand-logo-full{width:220px;max-height:64px}
   .main-nav{gap:13px}
   .main-nav a{font-size:11px}
