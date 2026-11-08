@@ -40,33 +40,93 @@ jobs:
           RELEASE_TAG: ${{ inputs.release_tag }}
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          import hashlib, json, os, pathlib, sys
-          tag=os.environ['RELEASE_TAG']; version=tag[1:]
-          root=pathlib.Path('release')
-          report=json.loads((root/f'VirusTotal-Report-{tag}.json').read_text(encoding='utf-8'))
-          def sha(path):
-              with path.open('rb') as f:
-                  h=hashlib.sha256()
-                  for chunk in iter(lambda:f.read(1024*1024), b''):h.update(chunk)
-                  return h.hexdigest()
-          assert report['schema_version']==1 and report['release_tag']==tag and report['version']==version, 'wrong release manifest'
-          assert report['filename']=='esp32coder.exe' and report['zip_filename']==f'ESP32-Coder-{version}.zip', 'wrong asset names'
-          assert report['github_release']==f'https://github.com/{os.environ["GITHUB_REPOSITORY"]}/releases/tag/{tag}', 'wrong repository'
-          assert report['updater_ed25519_verified'] is True, 'Ed25519 was not verified by publisher'
-          assert report['virustotal']['malicious']==0 and report['virustotal']['suspicious']==0, 'VirusTotal findings'
-          assert sha(root/'esp32coder.exe')==report['sha256'].lower(), 'EXE hash mismatch'
-          assert sha(root/f'ESP32-Coder-{version}.zip')==report['zip_sha256'].lower(), 'ZIP hash mismatch'
-          import zipfile
-          with zipfile.ZipFile(root/f'ESP32-Coder-{version}.zip') as z:
-              executables=[name for name in z.namelist() if name.lower().endswith('/esp32coder.exe')]
-              assert len(executables)==1, 'ZIP must contain exactly one ESP32 Coder executable'
-              embedded=hashlib.sha256(z.read(executables[0])).hexdigest()
-              assert embedded==report['sha256'].lower(), 'ZIP embedded EXE differs from published EXE'
-          # Only attest the executable and its archive; the VirusTotal manifest is not a build input.
-          (root/f'VirusTotal-Report-{tag}.json').unlink()
-          print('Release hash verification passed; this workflow did NOT compile the executable.')
-          PY
+          python3 - <<'PYTHON'
+          import hashlib, json, os, pathlib, sys, zipfile, traceback
+
+          # Validate the prebuilt release bytes; NEVER claim these were compiled in Actions.
+          # Print actionable diagnostics to the job log instead of an opaque AssertionError.
+          try:
+              tag = os.environ['RELEASE_TAG']
+              version = tag.removeprefix('v')
+              repo = os.environ['GITHUB_REPOSITORY']
+              root = pathlib.Path('release')
+              exe = root / 'esp32coder.exe'
+              archive = root / f'ESP32-Coder-{version}.zip'
+              manifest_path = root / f'VirusTotal-Report-{tag}.json'
+
+              def require(test, message):
+                  if not test:
+                      raise ValueError(message)
+
+              def sha256(path_or_file):
+                  digest = hashlib.sha256()
+                  for chunk in iter(lambda: path_or_file.read(1024 * 1024), b''):
+                      digest.update(chunk)
+                  return digest.hexdigest()
+
+              print('Release tag:', tag, 'repository:', repo, flush=True)
+              print('Downloaded files:', ', '.join(sorted(p.name for p in root.iterdir())), flush=True)
+              for path in (exe, archive, manifest_path):
+                  require(path.is_file(), f'Missing release asset: {path.name}')
+
+              # utf-8-sig also accepts normal UTF-8 without a BOM.
+              report = json.loads(manifest_path.read_text(encoding='utf-8-sig'))
+              require(isinstance(report, dict), 'VirusTotal manifest is not a JSON object')
+              def field(key, expected):
+                  actual = report.get(key)
+                  require(type(actual) is type(expected) and actual == expected,
+                          f'Manifest {key} mismatch: expected {expected!r}, got {actual!r}')
+
+              field('schema_version', 1)
+              field('version', version)
+              field('release_tag', tag)
+              field('filename', 'esp32coder.exe')
+              field('zip_filename', archive.name)
+              field('github_release', f'https://github.com/{repo}/releases/tag/{tag}')
+              field('updater_ed25519_verified', True)
+              vt = report.get('virustotal')
+              require(isinstance(vt, dict), 'VirusTotal section missing in JSON report')
+              for key in ('malicious', 'suspicious'):
+                  require(type(vt.get(key)) is int and vt[key] == 0,
+                          f'VirusTotal {key} is not zero: {vt.get(key)!r}')
+              print('Manifest metadata and VirusTotal zero detections: OK', flush=True)
+
+              with exe.open('rb') as f:
+                  actual_exe_hash = sha256(f)
+              expected_exe_hash = str(report.get('sha256', '')).lower()
+              require(actual_exe_hash == expected_exe_hash,
+                      f'EXE SHA-256 mismatch: expected {expected_exe_hash}, downloaded {actual_exe_hash}')
+              print('EXE SHA-256 verified:', actual_exe_hash, flush=True)
+
+              with archive.open('rb') as f:
+                  actual_zip_hash = sha256(f)
+              expected_zip_hash = str(report.get('zip_sha256', '')).lower()
+              require(actual_zip_hash == expected_zip_hash,
+                      f'ZIP SHA-256 mismatch: expected {expected_zip_hash}, downloaded {actual_zip_hash}')
+              print('ZIP SHA-256 verified:', actual_zip_hash, flush=True)
+
+              with zipfile.ZipFile(archive) as z:
+                  # ZIPs produced on Windows may contain either path separator.
+                  members = [member for member in z.infolist() if not member.is_dir()]
+                  entries = [member for member in members
+                             if member.filename.replace('\\', '/') == 'ESP32 Coder/esp32coder.exe']
+                  require(len(entries) == 1 and len(members) == 1,
+                          'Unexpected ZIP payload (expected only ESP32 Coder/esp32coder.exe); got: '
+                          + ', '.join(member.filename for member in members[:12]))
+                  with z.open(entries[0]) as embedded:
+                      actual_embedded_hash = sha256(embedded)
+                  require(actual_embedded_hash == actual_exe_hash,
+                          f'ZIP embedded EXE SHA-256 mismatch: {actual_embedded_hash} vs {actual_exe_hash}')
+              print('EXE inside ZIP matches separately published EXE: OK', flush=True)
+
+              # Attest only the executable and its ZIP; JSON is a verification input.
+              manifest_path.unlink()
+              print('Verification PASS. GitHub did not compile this EXE.', flush=True)
+          except Exception as error:
+              print(f'::error title=Release manifest or SHA-256 validation failed::{error}', flush=True)
+              traceback.print_exc()
+              sys.exit(1)
+          PYTHON
       - name: Create Sigstore artifact attestation for EXE and ZIP
         id: attest
         uses: actions/attest@v4
