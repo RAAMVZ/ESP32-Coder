@@ -1,0 +1,14 @@
+{
+    "schema_version":  1,
+    "verified":  true,
+    "release_tag":  "v1.1.10",
+    "filename":  "esp32coder.exe",
+    "sha256":  "b3eb78dffb9452e5d32b048de95221d910f709f1f144f10cd79196581f50510f",
+    "zip_filename":  "ESP32-Coder-1.1.10.zip",
+    "zip_sha256":  "ce336daffdb5db413293606df081b6b4606a643a07077dc92738ace7137d1e97",
+    "workflow":  "RAAMVZ/ESP32-Coder/.github/workflows/esp32-coder-release-attestation.yml",
+    "workflow_run_url":  "https://github.com/RAAMVZ/ESP32-Coder/actions/runs/42515787221",
+    "bundle_url":  "https://github.com/RAAMVZ/ESP32-Coder/releases/download/v1.1.10/ESP32-Coder-v1.1.10.sigstore.json",
+    "github_release":  "https://github.com/RAAMVZ/ESP32-Coder/releases/tag/v1.1.10",
+    "scope":  "Released EXE and ZIP file digests; not a GitHub source build or malware-free certification."
+}
