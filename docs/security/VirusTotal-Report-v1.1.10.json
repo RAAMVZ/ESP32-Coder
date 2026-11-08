@@ -1,0 +1,26 @@
+{
+    "schema_version":  1,
+    "application":  "ESP32 Coder",
+    "version":  "1.1.10",
+    "release_tag":  "v1.1.10",
+    "filename":  "esp32coder.exe",
+    "sha256":  "b3eb78dffb9452e5d32b048de95221d910f709f1f144f10cd79196581f50510f",
+    "zip_filename":  "ESP32-Coder-1.1.10.zip",
+    "zip_sha256":  "ce336daffdb5db413293606df081b6b4606a643a07077dc92738ace7137d1e97",
+    "windows_authenticode":  {
+                                 "verified":  false,
+                                 "status":  "not_signed",
+                                 "signer":  null
+                             },
+    "updater_ed25519_verified":  true,
+    "virustotal":  {
+                       "scan_utc":  "2026-11-08T16:42:29Z",
+                       "malicious":  0,
+                       "suspicious":  0,
+                       "completed_engines":  67,
+                       "total_engines":  75,
+                       "url":  "https://www.virustotal.com/gui/file/b3eb78dffb9452e5d32b048de95221d910f709f1f144f10cd79196581f50510f/detection",
+                       "disclaimer":  "No detections is not a guarantee of security."
+                   },
+    "github_release":  "https://github.com/RAAMVZ/ESP32-Coder/releases/tag/v1.1.10"
+}
