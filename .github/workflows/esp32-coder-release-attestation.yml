@@ -1,0 +1,116 @@
+# Attests the SHA-256 identity of locally built, published release EXE and ZIP.
+# This is a release-artifact attestation, NOT proof that GitHub built the binary.
+name: ESP32 Coder release artifact attestation
+run-name: ESP32 Coder attestation ${{ inputs.release_tag }}
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Existing published release tag, e.g. v1.1.10'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+      contents: write
+    steps:
+      - name: Download exact release assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || { echo 'Invalid stable release tag'; exit 1; }
+          mkdir -p release
+          version="${RELEASE_TAG#v}"
+          gh release download "$RELEASE_TAG" -R "$GITHUB_REPOSITORY" --dir release \
+            --pattern 'esp32coder.exe' \
+            --pattern "ESP32-Coder-${version}.zip" \
+            --pattern "VirusTotal-Report-${RELEASE_TAG}.json"
+      - name: Verify release manifest and file SHA-256 before attesting
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, sys
+          tag=os.environ['RELEASE_TAG']; version=tag[1:]
+          root=pathlib.Path('release')
+          report=json.loads((root/f'VirusTotal-Report-{tag}.json').read_text(encoding='utf-8'))
+          def sha(path):
+              with path.open('rb') as f:
+                  h=hashlib.sha256()
+                  for chunk in iter(lambda:f.read(1024*1024), b''):h.update(chunk)
+                  return h.hexdigest()
+          assert report['schema_version']==1 and report['release_tag']==tag and report['version']==version, 'wrong release manifest'
+          assert report['filename']=='esp32coder.exe' and report['zip_filename']==f'ESP32-Coder-{version}.zip', 'wrong asset names'
+          assert report['github_release']==f'https://github.com/{os.environ["GITHUB_REPOSITORY"]}/releases/tag/{tag}', 'wrong repository'
+          assert report['updater_ed25519_verified'] is True, 'Ed25519 was not verified by publisher'
+          assert report['virustotal']['malicious']==0 and report['virustotal']['suspicious']==0, 'VirusTotal findings'
+          assert sha(root/'esp32coder.exe')==report['sha256'].lower(), 'EXE hash mismatch'
+          assert sha(root/f'ESP32-Coder-{version}.zip')==report['zip_sha256'].lower(), 'ZIP hash mismatch'
+          import zipfile
+          with zipfile.ZipFile(root/f'ESP32-Coder-{version}.zip') as z:
+              executables=[name for name in z.namelist() if name.lower().endswith('/esp32coder.exe')]
+              assert len(executables)==1, 'ZIP must contain exactly one ESP32 Coder executable'
+              embedded=hashlib.sha256(z.read(executables[0])).hexdigest()
+              assert embedded==report['sha256'].lower(), 'ZIP embedded EXE differs from published EXE'
+          # Only attest the executable and its archive; the VirusTotal manifest is not a build input.
+          (root/f'VirusTotal-Report-{tag}.json').unlink()
+          print('Release hash verification passed; this workflow did NOT compile the executable.')
+          PY
+      - name: Create Sigstore artifact attestation for EXE and ZIP
+        id: attest
+        uses: actions/attest@v4
+        with:
+          subject-path: release/*
+      - name: Verify both subjects using the GitHub attestation API
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for subject in release/esp32coder.exe release/ESP32-Coder-*.zip; do
+            success=0
+            for try in 1 2 3 4 5; do
+              if gh attestation verify "$subject" --repo "$GITHUB_REPOSITORY" --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/esp32-coder-release-attestation.yml"; then
+                success=1; break
+              fi
+              sleep 8
+            done
+            if [[ "$success" != 1 ]]; then echo "Attestation verification failed for $subject"; exit 1; fi
+          done
+      - name: Upload downloadable Sigstore bundle to the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          BUNDLE_PATH: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          set -euo pipefail
+          test -s "$BUNDLE_PATH"
+          filename="ESP32-Coder-${RELEASE_TAG}.sigstore.json"
+          cp "$BUNDLE_PATH" "$filename"
+          # Do not overwrite previously published proof. Another run with the same
+          # tag must not silently modify already downloaded release artifacts.
+          if gh release view "$RELEASE_TAG" -R "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' | grep -Fxq "$filename"; then
+            echo "Bundle already exists: $filename; leaving the original unchanged."
+          else
+            gh release upload "$RELEASE_TAG" "$filename" -R "$GITHUB_REPOSITORY"
+          fi
+      - name: Print verification links
+        env:
+          ATTESTATION_URL: ${{ steps.attest.outputs.attestation-url }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          echo "GitHub attestation: $ATTESTATION_URL" >> "$GITHUB_STEP_SUMMARY"
+          echo "Release: https://github.com/$GITHUB_REPOSITORY/releases/tag/$RELEASE_TAG" >> "$GITHUB_STEP_SUMMARY"
+          echo 'This workflow verifies and attests release files; it does not rebuild the EXE from source.' >> "$GITHUB_STEP_SUMMARY"
