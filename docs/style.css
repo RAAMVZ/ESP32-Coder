@@ -1583,7 +1583,7 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.03em}
   --bg:#ffffff; --bg-2:#ffffff;
   --panel:#ffffff; --panel-2:#f5f9fb;
   --line:#dce7eb; --line-2:#cbdde2;
-  --ink:#172d37; --ink-2:#4a6270; --muted:#66808a;
+  --ink:#10262f; --ink-2:#1f3a45; --muted:#2d4a56;
   --mint:#087e72; --mint-2:#10a690; --cyan:#277eac;
   --glow-mint:0 10px 38px rgba(13,120,112,.08);
   --glow-cyan:0 10px 38px rgba(36,110,150,.08);
@@ -1598,9 +1598,9 @@ body::before{display:none}
 /* Preserve the authentic white-on-dark wordmark in a small brand plate. */
 .brand img.brand-logo-full,.footer-brand img.footer-brand-logo{background:#09141c;border-radius:12px;padding:5px 10px;filter:none;box-shadow:0 3px 12px rgba(12,38,45,.12)}
 .brand:hover img.brand-logo-full{transform:scale(1.015)}
-.main-nav a{color:#445f6c}
+.main-nav a{color:#24414c;font-size:16px;font-weight:700}
 .main-nav a:hover,.main-nav a:focus-visible{color:var(--mint)}
-.nav-download{background:#ecfaf5;color:#075f57;border-color:#b9dfd7}
+.nav-download{background:#ecfaf5;color:#075f57;border-color:#b9dfd7;font-size:16px;font-weight:750}
 .nav-download:hover{background:#ddf6ec;border-color:#75c6b2;box-shadow:0 6px 17px rgba(5,114,102,.10)}
 .hero h1 em,.section h2 em{background:linear-gradient(108deg,#087d72,#18ad99 48%,#277eac 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#087d72}
 .hero-intro strong{color:#153b40}
@@ -1620,7 +1620,7 @@ body::before{display:none}
 .hero-art.hero-screenshot .mini-label{color:#5a7782}
 .interface-shot{border-color:#c8e0e0;box-shadow:0 18px 45px rgba(23,60,68,.16)}
 .interface-shot:hover{border-color:#4db5aa;box-shadow:0 22px 48px rgba(23,60,68,.2)}
-.screenshot-caption{color:#58717c}
+.screenshot-caption{color:#203942;font-size:15px}
 .carousel-arrow{background:#ffffff;color:#126d68;border-color:#a9d9d2;box-shadow:0 5px 18px rgba(23,60,68,.13)}
 .carousel-arrow:hover,.carousel-arrow:focus-visible{background:#eaf9f5;color:#075f58;border-color:#69baaa;box-shadow:0 6px 22px rgba(23,60,68,.2)}
 .carousel-dot{background:#e3f1ef;border-color:#b4d6d3}
@@ -1629,7 +1629,7 @@ body::before{display:none}
 .rail{background:#f6fafb;border-block:1px solid #e2ebed}
 .rail::before{display:none}
 .rail-grid>div strong{color:#1f454c}
-.rail-grid>div span,.rail-grid>div.rail-final{color:#657c88}
+.rail-grid>div span,.rail-grid>div.rail-final{color:#24414c}
 .eyebrow,.benefit-index,.card-eyebrow,.docs-step,.docs-sidebar-title,.flash-number,.spotlight-kicker{color:#0b8075}
 .benefit-card,.benefit-turbo{background:#fff;border-color:#dfe9ec;box-shadow:0 8px 25px rgba(29,73,85,.045)}
 .benefit-turbo{background:#f2fbf8}
@@ -1656,7 +1656,7 @@ body::before{display:none}
 .download-content h2 span{color:#1d8c85}
 .release-panel{background:#fff;border-color:#d0e4e3;backdrop-filter:none;box-shadow:0 9px 30px rgba(24,74,90,.07)}
 .release-panel>strong{color:#124b4a}
-.release-meta{color:#577680}
+.release-meta{color:#24414c;font-size:14px}
 .download-folder-hint,.docs-notice{background:#e9f7f2;border-color:#b7ded4;color:#35565e}
 .download-folder-hint strong,.docs-notice strong{color:#17564d}
 .download-folder-hint code{color:#0f6f62}
@@ -2255,3 +2255,409 @@ body .docs-section summary{font-size:17px}
 
 /* Keep deep links to library-import steps clear of the sticky site header. */
 .docs-section h3[id]{scroll-margin-top:115px}
+
+
+/* ============================================================
+   2026-11-08 | Centered readable navigation + verified trust cards
+   Second design variant: NO yellow navigation outline.
+   Badges remain hidden until their JSON proof passes JS checks.
+   ============================================================ */
+html.feed-page .header-inner{
+  gap:clamp(10px,1.35vw,18px);
+  justify-content:space-between;
+}
+html.feed-page .header-inner .brand{
+  flex:0 1 244px;
+  min-width:0;
+  margin-right:0;
+}
+html.feed-page .header-inner .brand img.brand-logo-full{
+  width:min(244px,100%);
+}
+html.feed-page .main-nav{
+  display:flex;
+  flex:1 1 auto;
+  min-width:0;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+  padding:0;
+  border:0;
+  outline:0;
+  box-shadow:none;
+  background:transparent;
+}
+html.feed-page .main-nav a{
+  position:relative;
+  flex:0 0 auto;
+  padding:8px clamp(8px,1.08vw,15px);
+  font-size:clamp(14px,1.05vw,16.5px);
+  line-height:1.25;
+  font-weight:780;
+  white-space:nowrap;
+  letter-spacing:-.025em;
+  color:#17353d;
+}
+html.feed-page .main-nav a+a::before{
+  content:'';
+  position:absolute;
+  width:1px;
+  height:17px;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+  background:#20b798;
+  opacity:.75;
+}
+html.feed-page .header-inner .nav-download{
+  flex:0 0 auto;
+  margin-left:0;
+  font-size:14px;
+}
+html.feed-page .hero-security-panel{
+  margin-top:10px;
+  padding:12px 13px 13px;
+  border:1px solid #7bd6bd;
+  border-radius:17px;
+  background:linear-gradient(133deg,#f7fffc 0%,#edfbf5 65%,#e5f8f1 100%);
+  box-shadow:0 5px 17px rgba(8,110,84,.09),inset 0 1px 0 rgba(255,255,255,.9);
+  min-width:0;
+}
+html.feed-page .hero-security-heading{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:0 2px 9px;
+  border-bottom:1px solid #c2e8dc;
+}
+html.feed-page .trust-title-icon{
+  color:#119c70;
+  filter:drop-shadow(0 1px 1px rgba(3,103,65,.16));
+  flex:0 0 auto;
+}
+html.feed-page .hero-security-title{
+  display:inline-block;
+  font-size:clamp(14px,1.25vw,18px);
+  font-weight:800;
+  color:#0a3840;
+  line-height:1.2;
+  text-decoration:none;
+}
+html.feed-page .hero-security-title:hover{
+  color:#057e71;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+html.feed-page .hero-security-badges{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  margin-top:10px;
+}
+html.feed-page .hero-security-badges .trust-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:7px;
+  min-width:0;
+  min-height:49px;
+  padding:7px 8px;
+  background:linear-gradient(160deg,#fff,#eefff7);
+  border:1px solid #9bdfc3;
+  border-radius:12px;
+  box-shadow:0 4px 9px rgba(14,117,84,.12),inset 0 1px 0 rgba(255,255,255,.93);
+  color:#05663b;
+  font-weight:800;
+  line-height:1.2;
+  font-size:clamp(11.5px,.88vw,13.5px);
+  text-decoration:none;
+  transition:background .16s,border-color .16s,box-shadow .16s,transform .16s;
+}
+html.feed-page .hero-security-badges .trust-badge[hidden]{display:none!important}
+html.feed-page .hero-security-badges .trust-badge:hover{
+  transform:translateY(-1px);
+  background:#e7fff2;
+  border-color:#44bc89;
+  box-shadow:0 7px 15px rgba(9,114,80,.18);
+}
+html.feed-page .trust-brand-icon{
+  flex:0 0 31px;
+  max-width:31px;
+  height:31px;
+  padding-right:6px;
+  border-right:1px solid #b2e6d0;
+}
+html.feed-page .trust-brand-icon-vt{color:#2864d9}
+html.feed-page .trust-brand-icon-gh{color:#1d2426}
+html.feed-page .trust-badge-text{
+  flex:1;
+  min-width:0;
+  overflow-wrap:break-word;
+}
+html.feed-page .trust-check{
+  flex:0 0 15px;
+  color:#13a86d;
+}
+@media (min-width:951px) and (max-width:1190px){
+  html.feed-page .header-inner .brand{flex-basis:198px}
+  html.feed-page .header-inner .brand img.brand-logo-full{width:min(198px,100%)}
+  html.feed-page .main-nav a{font-size:clamp(12px,1.2vw,14px);padding-inline:clamp(4px,.65vw,9px)}
+  html.feed-page .header-inner .nav-download{font-size:12px;padding-inline:11px}
+  html.feed-page .hero-security-badges{grid-template-columns:1fr}
+}
+@media(max-width:950px){
+  html.feed-page .main-nav{display:none}
+  html.feed-page .header-inner .brand{flex-basis:220px}
+}
+@media(max-width:680px){
+  html.feed-page .header-inner .brand{flex-basis:clamp(155px,48vw,215px)}
+  html.feed-page .hero-security-panel{padding:11px}
+  html.feed-page .hero-security-heading{align-items:flex-start}
+  html.feed-page .hero-security-title{font-size:15px}
+  html.feed-page .hero-security-badges{grid-template-columns:1fr;gap:8px}
+  html.feed-page .hero-security-badges .trust-badge{font-size:13px}
+}
+
+
+/* ===== November 2026 readability pass ===== */
+.main-nav{justify-content:center;flex:1 1 auto}
+.hero-intro,
+.section-head p,
+.docs-teaser-card p,
+.libraries-spotlight p,
+.library-line p,
+.flash-card p,
+.stance-text>p,
+.step-card p,
+.download-content>p,
+.docs-hero>p,
+.docs-section p,
+.docs-section ol,
+.docs-section ul,
+.download-folder-hint,
+.hero-download-note,
+.hero-live-release,
+.release-meta,
+.docs-breadcrumb,
+.docs-sidebar a,
+.footer-inner p,
+.footer-links a,
+.release-panel>p,
+.release-panel>small,
+.faq-grid details p,
+.audience-card>span:last-child,
+.benefit-card p,
+.bento-card p,
+.docs-note,
+.docs-notice,
+.hero-download-note,
+.library-line p,
+.spotlight-chips span,
+.chip-pills span,
+.download-tags span,
+.stance-tags span{
+  color:var(--ink-2) !important;
+}
+
+.eyebrow,
+.card-eyebrow,
+.spotlight-kicker,
+.docs-breadcrumb,
+.docs-step,
+.docs-sidebar-title,
+.flash-number,
+.benefit-index,
+.release-label,
+.audience-label,
+.download-tags span,
+.chip-pills span,
+.stance-tags span,
+.spotlight-chips span{
+  font-size:14px !important;
+  line-height:1.35 !important;
+  letter-spacing:.06em !important;
+  font-weight:780 !important;
+}
+
+.hero-intro{
+  font-size:21px !important;
+  line-height:1.72 !important;
+  max-width:760px !important;
+}
+
+.section-head p,
+.download-content>p,
+.docs-teaser-card p,
+.docs-hero>p{
+  font-size:22px !important;
+  line-height:1.65 !important;
+  max-width:980px;
+}
+
+.libraries-spotlight p,
+.flash-card p,
+.stance-text>p,
+.step-card p,
+.benefit-card p,
+.bento-card p,
+.library-line p,
+.docs-section p,
+.docs-section ol,
+.docs-section ul,
+.docs-note,
+.docs-notice,
+.faq-grid details p{
+  font-size:18px !important;
+  line-height:1.7 !important;
+}
+
+.hero-download-note,
+.download-folder-hint,
+.hero-live-release,
+.release-meta,
+.release-panel>p,
+.release-panel>small,
+.docs-sidebar a,
+.footer-inner p,
+.footer-links a{
+  font-size:17px !important;
+  line-height:1.65 !important;
+}
+
+.download-folder-hint strong,
+.docs-notice strong,
+.hero-download-note strong,
+.download-content h2 span,
+.docs-section strong,
+.release-panel>strong,
+.library-line h3,
+.flash-card h3,
+.step-card h3,
+.faq-grid summary,
+.docs-section summary,
+.docs-section h2,
+.benefit-card h3,
+.libraries-spotlight h3,
+.docs-teaser-card h2,
+.audience-card strong,
+.release-panel button,
+.btn-subtle,
+.btn-primary,
+.main-nav a,
+.nav-download{
+  color:var(--ink) !important;
+}
+
+.download-content h2 span,
+.hero h1 em,
+.section h2 em,
+.libraries-spotlight h3 em{
+  color:var(--mint) !important;
+}
+
+@media(max-width:1024px){
+  .hero-intro{font-size:19px !important;line-height:1.65 !important;}
+  .section-head p,
+  .download-content>p,
+  .docs-teaser-card p,
+  .docs-hero>p{font-size:19px !important;line-height:1.6 !important;}
+  .libraries-spotlight p,
+  .flash-card p,
+  .stance-text>p,
+  .step-card p,
+  .benefit-card p,
+  .bento-card p,
+  .library-line p,
+  .docs-section p,
+  .docs-section ol,
+  .docs-section ul,
+  .docs-note,
+  .docs-notice,
+  .faq-grid details p{font-size:16px !important;line-height:1.65 !important;}
+  .hero-download-note,
+  .download-folder-hint,
+  .hero-live-release,
+  .release-meta,
+  .release-panel>p,
+  .release-panel>small,
+  .docs-sidebar a,
+  .footer-inner p,
+  .footer-links a{font-size:15px !important;}
+  .eyebrow,
+  .card-eyebrow,
+  .spotlight-kicker,
+  .docs-breadcrumb,
+  .docs-step,
+  .docs-sidebar-title,
+  .flash-number,
+  .benefit-index,
+  .release-label,
+  .audience-label,
+  .download-tags span,
+  .chip-pills span,
+  .stance-tags span,
+  .spotlight-chips span{font-size:12px !important;}
+}
+
+@media(max-width:680px){
+  .hero-intro{font-size:17px !important;}
+  .section-head p,
+  .download-content>p,
+  .docs-teaser-card p,
+  .docs-hero>p{font-size:17px !important;}
+  .libraries-spotlight p,
+  .flash-card p,
+  .stance-text>p,
+  .step-card p,
+  .benefit-card p,
+  .bento-card p,
+  .library-line p,
+  .docs-section p,
+  .docs-section ol,
+  .docs-section ul,
+  .docs-note,
+  .docs-notice,
+  .faq-grid details p{font-size:15px !important;}
+  .hero-download-note,
+  .download-folder-hint,
+  .hero-live-release,
+  .release-meta,
+  .release-panel>p,
+  .release-panel>small,
+  .docs-sidebar a,
+  .footer-inner p,
+  .footer-links a{font-size:14px !important;}
+}
+
+/* Very discreet total visit count: bottom-right, white on white.
+   Only selecting the digits reveals them. No tooltip or framing. */
+.site-total-visits{
+  position:fixed;
+  right:3px;
+  bottom:2px;
+  z-index:61;
+  display:inline-block;
+  width:auto;
+  min-width:1ch;
+  background:transparent;
+  border:0;
+  padding:0;
+  margin:0;
+  font:400 11px/1.1 Arial,sans-serif;
+  letter-spacing:0;
+  color:#ffffff !important;
+  text-shadow:none;
+  opacity:1;
+  white-space:nowrap;
+  cursor:text;
+  -webkit-user-select:text;
+  user-select:text;
+}
+.site-total-visits::selection{
+  background:#1865a7;
+  color:#ffffff;
+}
+.site-total-visits::-moz-selection{
+  background:#1865a7;
+  color:#ffffff;
+}
