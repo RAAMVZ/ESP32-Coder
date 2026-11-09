@@ -26,7 +26,11 @@
           !Number.isFinite(Date.parse(vt.scan_utc)) ||
           Date.parse(vt.scan_utc) > Date.now() + 300000 ||
           vt.url !== 'https://www.virustotal.com/gui/file/' + report.sha256 + '/detection') return;
-      badge.href = vt.url;
+      // Open the summary in the currently selected website language.
+      // The localized report contains a verified direct link to vt.url.
+      // VirusTotal's own interface language cannot be controlled by us.
+      const locale = badge.getAttribute('data-virustotal-badge') === 'ru' ? 'ru' : 'en';
+      badge.href = './security.html?lang=' + locale;
       badge.hidden = false;
       badge.style.display = 'inline-flex';
       badge.style.alignItems = 'center';
