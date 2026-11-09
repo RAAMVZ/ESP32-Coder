@@ -38,7 +38,6 @@
                   '/ESP32-Coder-' + report.release_tag + '.sigstore.json' ||
           !/^https:\/\/github\.com\/RAAMVZ\/ESP32-Coder\/actions\/runs\/[0-9]+$/.test(proof.workflow_run_url)) return;
       badge.href = proof.workflow_run_url;
-      badge.title += ' · ' + report.release_tag;
       badge.hidden = false;
       badge.style.display = 'inline-flex';
       badge.style.alignItems = 'center';
