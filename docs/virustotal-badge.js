@@ -27,7 +27,6 @@
           Date.parse(vt.scan_utc) > Date.now() + 300000 ||
           vt.url !== 'https://www.virustotal.com/gui/file/' + report.sha256 + '/detection') return;
       badge.href = vt.url;
-      badge.title += ' · ' + report.release_tag + ' · ' + vt.scan_utc;
       badge.hidden = false;
       badge.style.display = 'inline-flex';
       badge.style.alignItems = 'center';
