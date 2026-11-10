@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>ESP32 Coder — Download security</title>
+<link href="assets/favicon.png" rel="icon" type="image/png">
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#10191c;background:#f7f9f9}
+*{box-sizing:border-box}body{margin:0;padding:35px 18px}main{max-width:860px;margin:auto;border-radius:16px;border:1px solid #d3e0db;background:#fff;padding:clamp(20px,4vw,40px);box-shadow:0 5px 28px #0b28200a}
+h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line-height:1.65;margin:.5rem 0 1rem}
+.header-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}a{color:#086d63;overflow-wrap:anywhere}.back{display:inline-block;margin:2px 0 22px}
+.stat{padding:14px 0;border-top:1px solid #d7e4df;overflow-wrap:anywhere}.stat dt{font-weight:700;margin-bottom:5px}.stat dd{margin:0;overflow-wrap:anywhere;line-height:1.5}
+.stat dd.hash{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.85rem}
+#external-links{display:flex;gap:12px 24px;flex-wrap:wrap;margin:14px 0}.security-link{font-weight:600}
+#attestation{margin-top:20px}#attestation p{font-size:.95rem}.notice{border-left:3px solid #15847a;padding-left:13px;margin:16px 0 25px}
+#result[role="status"]{min-height:40px}
+</style>
+</head>
+<body>
+<main>
+<div class="header-row">
+  <a class="back" id="back-home" href="en.html">Back to English website</a>
+</div>
+<h1 id="security-heading">ESP32 Coder — Download security</h1>
+<p id="security-description" class="notice">This page shows the independent antivirus report and file hashes. Zero detections do not guarantee safety.</p>
+<div id="result" role="status" aria-live="polite">Loading security report…</div>
+<div id="external-links"></div>
+<div id="attestation" class="stat" hidden></div>
+</main>
+<script>
+(() => {
+  'use strict';
+  // This document has a fixed language. Query strings cannot switch languages.
+  const locale = 'en';
+  const t = {
+      title:'ESP32 Coder — Download security', home:'Back to English website',
+      description:'This page shows the independent antivirus report and file hashes. Zero detections do not guarantee safety.',
+      loading:'Loading security report…', unavailable:'Security report is unavailable', invalid:'Invalid security report',
+      version:'Version', exeHash:'EXE SHA-256', zipHash:'ZIP SHA-256',
+      detections:'VirusTotal', malicious:'malicious', suspicious:'suspicious', engines:'engines checked',
+      scanDate:'Scan date (UTC)', windows:'Windows Authenticode signature', signed:'Valid', unsigned:'Not signed with Windows Authenticode',
+      updater:'Updater Ed25519 signature', verified:'Verified', notVerified:'Not verified',
+      vtLink:'View original VirusTotal report', releaseLink:'Open GitHub Release',
+      sigstore:'GitHub Artifact Attestations (Sigstore): EXE and ZIP verified',
+      sigExplanation:'This attests to the released EXE and ZIP files, not a build performed by GitHub or a malware-free guarantee.',
+      sigBundle:'View Sigstore bundle'
+  };
+  const byId = id => document.getElementById(id);
+  document.documentElement.lang = locale;
+  document.title = t.title;
+  byId('back-home').href = locale + '.html';
+  byId('back-home').textContent = t.home;
+  byId('security-heading').textContent = t.title;
+  byId('security-description').textContent = t.description;
+  byId('result').textContent = t.loading;
+  function addRow(root, label, value, hash) {
+    const row = document.createElement('div'); row.className = 'stat';
+    const dt = document.createElement('dt'); dt.textContent = label;
+    const dd = document.createElement('dd'); dd.textContent = String(value);
+    if (hash) dd.className = 'hash';
+    row.append(dt,dd); root.append(row);
+  }
+  function addLink(root, caption, url) {
+    if (typeof url !== 'string' || !/^https:\/\//.test(url)) return;
+    const link=document.createElement('a');
+    link.className='security-link'; link.href=url; link.textContent=caption;
+    link.target='_blank'; link.rel='noopener noreferrer'; root.append(link);
+  }
+  const sha=/^[0-9a-f]{64}$/i;
+  const releaseBase='https://github.com/RAAMVZ/ESP32-Coder/releases/tag/';
+  async function showReport() {
+    const out=byId('result');
+    try {
+      const response=await fetch('./security/latest.json',{cache:'no-store'});
+      if (!response.ok) throw new Error('HTTP '+response.status);
+      const x=await response.json(); const vt=x && x.virustotal;
+      if (!x || x.schema_version!==1 || !/^\d+\.\d+\.\d+$/.test(x.version || '') ||
+          x.release_tag!=='v'+x.version || x.filename!=='esp32coder.exe' ||
+          !sha.test(x.sha256 || '') || !sha.test(x.zip_sha256 || '') ||
+          x.github_release!==releaseBase+x.release_tag || !vt ||
+          vt.url!=='https://www.virustotal.com/gui/file/'+x.sha256+'/detection' ||
+          !Number.isInteger(vt.malicious) || !Number.isInteger(vt.suspicious) ||
+          !Number.isInteger(vt.completed_engines) ||
+          !Number.isFinite(Date.parse(vt.scan_utc)) ||
+          !x.windows_authenticode || typeof x.windows_authenticode.verified!=='boolean' ||
+          typeof x.updater_ed25519_verified!=='boolean') throw new Error(t.invalid);
+      out.textContent='';
+      addRow(out,t.version,x.version);
+      addRow(out,t.exeHash,x.sha256,true);
+      addRow(out,t.zipHash,x.zip_sha256,true);
+      addRow(out,t.detections,`${vt.malicious} ${t.malicious} / ${vt.suspicious} ${t.suspicious} / ${vt.completed_engines} ${t.engines}`);
+      addRow(out,t.scanDate,vt.scan_utc);
+      addRow(out,t.windows,x.windows_authenticode.verified ?
+        t.signed + (x.windows_authenticode.signer ? ': '+x.windows_authenticode.signer : '') : t.unsigned);
+      addRow(out,t.updater,x.updater_ed25519_verified ? t.verified : t.notVerified);
+      const links=byId('external-links'); links.textContent='';
+      addLink(links,t.vtLink,vt.url);
+      addLink(links,t.releaseLink,x.github_release);
+      await showAttestation(x);
+    } catch (error) { out.textContent=t.unavailable+': '+(error && error.message ? error.message : 'Unknown error'); }
+  }
+  async function showAttestation(report) {
+    try {
+      const r=await fetch('./security/attestation.json',{cache:'no-store'});
+      if (!r.ok) return;
+      const a=await r.json();
+      if (!a || a.schema_version!==1 || a.verified!==true ||
+          a.release_tag!==report.release_tag || a.sha256!==report.sha256 ||
+          a.zip_sha256!==report.zip_sha256 || a.github_release!==report.github_release ||
+          a.workflow!=='RAAMVZ/ESP32-Coder/.github/workflows/esp32-coder-release-attestation.yml' ||
+          a.bundle_url!=='https://github.com/RAAMVZ/ESP32-Coder/releases/download/'+
+            a.release_tag+'/ESP32-Coder-'+a.release_tag+'.sigstore.json') return;
+      const target=byId('attestation'); target.textContent='';
+      const heading=document.createElement('strong'); heading.textContent=t.sigstore; target.append(heading);
+      const note=document.createElement('p'); note.textContent=t.sigExplanation; target.append(note);
+      addLink(target,t.sigBundle,a.bundle_url);
+      const pre=document.createElement('pre'); pre.style.whiteSpace='pre-wrap';
+      pre.textContent='gh attestation verify esp32coder.exe --repo RAAMVZ/ESP32-Coder'; target.append(pre);
+      target.hidden=false;
+    } catch (_) { /* No verified Sigstore status if proof is missing. */ }
+  }
+  showReport();
+})();
+</script>
+</body>
+</html>
