@@ -30,7 +30,7 @@
       // The localized report contains a verified direct link to vt.url.
       // VirusTotal's own interface language cannot be controlled by us.
       const locale = badge.getAttribute('data-virustotal-badge') === 'ru' ? 'ru' : 'en';
-      badge.href = './security.html?lang=' + locale;
+      badge.href = './security-' + locale + '.html';
       badge.hidden = false;
       badge.style.display = 'inline-flex';
       badge.style.alignItems = 'center';
