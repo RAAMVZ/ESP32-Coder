@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "public_report": true,
+  "audit_purpose": "first-party-malicious-behavior",
+  "application": "ESP32 Coder",
+  "version": "1.1.12",
+  "provider": "Cloudflare Workers AI",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "status": "completed",
+  "audit_session_utc": "2026-11-11T15:47:58Z",
+  "scan_utc": "2026-11-11T15:53:22.544Z",
+  "release_tag": "v1.1.12",
+  "exe_sha256": "d796583e548132e9bb0647ebb8b977f406db7441d5bed65f0195c8358f707c83",
+  "zip_sha256": "c2f2be6d55f1da066080d2a804f55499323cfccd4e34bc3073f0a5c55f0d627f",
+  "scope": "quick",
+  "coverage_status": "sampled-excerpts-only",
+  "coverage": {
+    "source_files": 53,
+    "reviewed_files": 8,
+    "reviewed_chunks": 8,
+    "planned_chunks": 8
+  },
+  "review": {
+    "screened_out_candidates": 5,
+    "second_pass_completed": 5,
+    "second_pass_planned": 5,
+    "second_pass_limited": false,
+    "confirmed": 0,
+    "false_positive": 0,
+    "needs_review": 0
+  },
+  "findings": [],
+  "threat_assessment": [
+    {
+      "id": "data_theft",
+      "finding_count": 0,
+      "confirmed": 0,
+      "false_positive": 0,
+      "needs_review": 0
+    },
+    {
+      "id": "malware_installation",
+      "finding_count": 0,
+      "confirmed": 0,
+      "false_positive": 0,
+      "needs_review": 0
+    },
+    {
+      "id": "spying",
+      "finding_count": 0,
+      "confirmed": 0,
+      "false_positive": 0,
+      "needs_review": 0
+    },
+    {
+      "id": "rat",
+      "finding_count": 0,
+      "confirmed": 0,
+      "false_positive": 0,
+      "needs_review": 0
+    },
+    {
+      "id": "destructive_actions",
+      "finding_count": 0,
+      "confirmed": 0,
+      "false_positive": 0,
+      "needs_review": 0
+    }
+  ],
+  "signature": {
+    "algorithm": "Ed25519 of SHA-256(JSON bytes)",
+    "available": true,
+    "public_key_sha256": "cca836c0c01e35fa692a6631dd4bb5c1e57271f1e10dff5149851b0f97a9ec53"
+  },
+  "signature_file": "ai-latest.json.sig",
+  "disclaimer": "This audit checks possible malicious actions initiated by ESP32 Coder itself, not exploitable security vulnerabilities. AI review of sampled source is not proof of clean runtime behavior."
+}
