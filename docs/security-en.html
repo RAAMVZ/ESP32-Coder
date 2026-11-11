@@ -40,7 +40,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
       loading:'Loading security report…', unavailable:'Security report is unavailable', invalid:'Invalid security report',
       version:'Version', exeHash:'EXE SHA-256', zipHash:'ZIP SHA-256',
       detections:'VirusTotal', malicious:'malicious', suspicious:'suspicious', engines:'engines checked',
-      scanDate:'Scan date (UTC)', windows:'Windows Authenticode signature', signed:'Valid', unsigned:'Not signed with Windows Authenticode',
+      scanDate:'Scan date (UTC)', sessionDate:'Audit session time (UTC)', windows:'Windows Authenticode signature', signed:'Valid', unsigned:'Not signed with Windows Authenticode',
       updater:'Updater Ed25519 signature', verified:'Verified', notVerified:'Not verified',
       vtLink:'View original VirusTotal report', releaseLink:'Open GitHub Release',
       sigstore:'GitHub Artifact Attestations (Sigstore): EXE and ZIP verified',
@@ -91,6 +91,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
       addRow(out,t.exeHash,x.sha256,true);
       addRow(out,t.zipHash,x.zip_sha256,true);
       addRow(out,t.detections,`${vt.malicious} ${t.malicious} / ${vt.suspicious} ${t.suspicious} / ${vt.completed_engines} ${t.engines}`);
+      if (x.audit_session_utc) addRow(out,t.sessionDate,x.audit_session_utc);
       addRow(out,t.scanDate,vt.scan_utc);
       addRow(out,t.windows,x.windows_authenticode.verified ?
         t.signed + (x.windows_authenticode.signer ? ': '+x.windows_authenticode.signer : '') : t.unsigned);
