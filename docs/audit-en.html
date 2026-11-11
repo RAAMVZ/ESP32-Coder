@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fff"><title>ESP32 Coder — First-party malicious behavior audit</title><link href="assets/favicon.png" rel="icon" type="image/png"><style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#10191c;background:#f7f9f9;color-scheme:light}*{box-sizing:border-box}body{margin:0;padding:35px 18px}main{max-width:860px;margin:auto;border-radius:16px;border:1px solid #d3e0db;background:#fff;padding:clamp(20px,4vw,40px);box-shadow:0 5px 28px #0b28200a}h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line-height:1.6}.back{display:inline-block;margin:2px 0 22px}a{color:#086d63;overflow-wrap:anywhere}.notice{border-left:3px solid #15847a;padding-left:13px;margin:18px 0 26px}.stat{padding:14px 0;border-top:1px solid #d7e4df;overflow-wrap:anywhere}.stat dt{font-weight:700;margin-bottom:5px}.stat dd{margin:0;line-height:1.5}.hash{font-family:ui-monospace,Consolas,monospace;font-size:.86rem;overflow-wrap:anywhere}.finding{border-top:1px solid #d7e4df;padding:14px 0}.finding h3{font-size:1rem}.subtle{color:#344850}.status{padding:14px 0;font-weight:600}.footer{border-top:1px solid #d7e4df;margin-top:24px;padding-top:18px}
+</style></head><body><main><a class="back" href="en.html">Back</a><h1>ESP32 Coder — First-party malicious behavior audit</h1><p class="notice">Checking for potentially malicious actions performed by ESP32 Coder against its users, not for exploitable vulnerabilities. Analysis with GLM-4.7-Flash (Cloudflare Workers AI). Model findings are hypotheses requiring human verification. Zero findings do not guarantee safety.</p><div id="audit" role="status" aria-live="polite">Checking for an audit report…</div><div id="findings"></div><div class="footer"><p id="provider-note">The developer runs this audit using the official API; the public website does not send visitors’ source code.</p><p><a href="security-en.html">Independent VirusTotal and signature check</a></p></div></main><script>
+(()=>{'use strict';
+const t={"invalid": "The published report is invalid or includes private metadata.", "waiting": "The audit is not published or has not completed.", "intro": "This public report includes only anonymized results. Filenames, code excerpts and line numbers are not published.", "version": "Version", "model": "Model", "scope": "Scope", "coverage": "Coverage", "chunks": "chunks", "files": "files", "sample": "Sampled audit (not the entire project)", "complete": "All selected source chunks", "date": "Common audit session (UTC)", "scan": "AI review completed (UTC)", "confirmed": "Evidence-confirmed", "false_positive": "Evidence-verified false positives", "needs_review": "Pending human review", "reviewed": "Second AI pass", "limited": "Second-pass request limit reached; remaining findings require review.", "five": "Five threat categories", "found": "Anonymized findings", "noissues": "No findings in reviewed excerpts. This does not prove the application is safe.", "potential": "potential harmful actions", "noThreat": "No findings in reviewed excerpts", "disclaimer": "AI findings are hypotheses. Final confirmed/false-positive decisions require human evidence.", "json": "View anonymized JSON", "signature": "Ed25519 signature (.sig)", "detailed": "Detailed public report (no source filenames)", "screened": "Out-of-scope vulnerability reports excluded", "status": "Status", "risk": "Category", "severity": "Severity", "ai": "Second-pass AI assessment", "supported": "Possible issue", "unsupported": "Possibly false positive", "unclear": "Insufficient context", "not_checked": "Second pass not run"}, threatLabels={"data_theft": "Data theft", "malware_installation": "Additional malware installation", "spying": "Spying / surveillance", "rat": "Remote access / control (RAT)", "destructive_actions": "Destructive actions"};
+const root=document.getElementById('audit'), entries=document.getElementById('findings');
+const sha=/^[a-f0-9]{64}$/i;
+function element(tag,text,cls){const node=document.createElement(tag);node.textContent=String(text);if(cls)node.className=cls;return node;}
+function row(label,value,cls){const block=element('dl','','stat');block.append(element('dt',label));block.append(element('dd',value,cls));root.append(block);}
+function validPublic(d){
+ const safeRoots=new Set(['schema_version','public_report','audit_purpose','application','version','provider','model','status','audit_session_utc','scan_utc','release_tag','exe_sha256','zip_sha256','scope','coverage_status','coverage','review','findings','threat_assessment','signature','signature_file','disclaimer']);
+ const safeFinding=new Set(['id','severity','threat_type','review_status','ai_assessment']);
+ if(!d||d.schema_version!==2||d.public_report!==true||d.audit_purpose!=='first-party-malicious-behavior'||d.status!=='completed'||
+    d.provider!=='Cloudflare Workers AI'||d.model!=='@cf/zai-org/glm-4.7-flash'||
+    !/^\d+\.\d+\.\d+$/.test(d.version||'')||
+    !Array.isArray(d.findings)||!d.coverage||!d.review||
+    !Number.isInteger(d.coverage.reviewed_chunks)||!Number.isInteger(d.coverage.planned_chunks)||
+    d.coverage.reviewed_chunks!==d.coverage.planned_chunks||d.coverage.reviewed_chunks<1||
+    !Number.isInteger(d.review.second_pass_completed)||d.review.second_pass_completed>d.review.second_pass_planned||
+    Object.keys(d).some(k=>!safeRoots.has(k)))return false;
+ for(const f of d.findings){if(!f||Object.keys(f).some(k=>!safeFinding.has(k))||
+   !/^F\d{3,}$/.test(f.id||'')||!['confirmed','false_positive','needs_review'].includes(f.review_status))return false;}
+ return true;
+}
+async function load(){try{
+ const response=await fetch('security/ai-latest.json',{cache:'no-store'});
+ if(!response.ok){root.textContent=t.waiting;return;}
+ const d=await response.json();
+ if(!validPublic(d)){root.textContent=t.invalid;return;}
+ const peers=await Promise.all([
+   fetch('security/latest.json',{cache:'no-store'}),fetch('security/attestation.json',{cache:'no-store'})]);
+ if(!peers.every(r=>r.ok)){root.textContent=t.waiting;return;}
+ const [vt,sg]=await Promise.all(peers.map(r=>r.json()));
+ if(!vt||!sg||vt.schema_version!==1||sg.schema_version!==1||sg.verified!==true||
+    vt.version!==d.version||vt.release_tag!==d.release_tag||sg.release_tag!==d.release_tag||
+    !sha.test(d.exe_sha256||'')||!sha.test(d.zip_sha256||'')||
+    vt.sha256!==d.exe_sha256||vt.zip_sha256!==d.zip_sha256||
+    sg.sha256!==d.exe_sha256||sg.zip_sha256!==d.zip_sha256||
+    !d.audit_session_utc||vt.audit_session_utc!==d.audit_session_utc||
+    sg.audit_session_utc!==d.audit_session_utc||d.signature_file!=='ai-latest.json.sig'){
+   root.textContent=t.waiting;return;
+ }
+ root.textContent='';root.append(element('p',t.intro,'subtle'));
+ row(t.version,d.version);row(t.model,d.model);row(t.scope,d.scope==='quick'?t.sample:t.complete);
+ row(t.coverage,d.coverage.reviewed_files+' / '+d.coverage.source_files+' '+t.files+', '+d.coverage.reviewed_chunks+' '+t.chunks);
+ row(t.date,d.audit_session_utc);row(t.scan,d.scan_utc);
+ row(t.reviewed,d.review.second_pass_completed+' / '+d.review.second_pass_planned);
+ if(Number.isInteger(d.review.screened_out_candidates))row(t.screened,d.review.screened_out_candidates);
+ if(d.review.second_pass_limited)root.append(element('p',t.limited,'subtle'));
+ row(t.confirmed,d.review.confirmed);row(t.false_positive,d.review.false_positive);row(t.needs_review,d.review.needs_review);
+ root.append(element('p',t.disclaimer,'subtle'));
+ const jsonLink=element('a',t.json);jsonLink.href='security/ai-latest.json';root.append(jsonLink);
+ const signatureLink=element('a',t.signature);signatureLink.href='security/ai-latest.json.sig';
+ root.append(element('p',''));root.append(signatureLink);
+ const detailed=element('a',t.detailed);detailed.href='security/ai-detailed-en.html';root.append(element('p',''));root.append(detailed);
+ entries.append(element('h2',t.five));
+ for(const [key,label] of Object.entries(threatLabels)){
+   const list=d.findings.filter(f=>f.threat_type===key);
+   const section=element('section','','finding');section.append(element('h3',label));
+   section.append(element('p',list.length?list.length+' '+t.potential:t.noThreat));
+   if(list.length){
+     section.append(element('p',`${t.confirmed}: ${list.filter(f=>f.review_status==='confirmed').length} · `+
+       `${t.false_positive}: ${list.filter(f=>f.review_status==='false_positive').length} · `+
+       `${t.needs_review}: ${list.filter(f=>f.review_status==='needs_review').length}`));
+   }
+   entries.append(section);
+ }
+ if(!d.findings.length){entries.append(element('p',t.noissues));return;}
+ entries.append(element('h2',t.found));
+ for(const f of d.findings.slice(0,250)){
+   const section=element('article','','finding');section.append(element('h3',`${f.id} · ${(f.severity||'info').toUpperCase()}`));
+   section.append(element('p',`${t.risk}: ${threatLabels[f.threat_type]||'Other'}`));
+   const statusText=f.review_status==='confirmed'?t.confirmed:f.review_status==='false_positive'?t.false_positive:t.needs_review;
+   section.append(element('p',`${t.status}: ${statusText}`));
+   const aiText=t[f.ai_assessment]||t.unclear;
+   section.append(element('p',`${t.ai}: ${aiText}`));entries.append(section);
+ }
+}catch(error){root.textContent=t.invalid;}}
+load();})();
+</script></body></html>
