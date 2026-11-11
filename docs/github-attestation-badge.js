@@ -37,11 +37,11 @@
           proof.bundle_url !== gh + '/releases/download/' + report.release_tag +
                   '/ESP32-Coder-' + report.release_tag + '.sigstore.json' ||
           !/^https:\/\/github\.com\/RAAMVZ\/ESP32-Coder\/actions\/runs\/[0-9]+$/.test(proof.workflow_run_url)) return;
-      badge.href = proof.workflow_run_url;
-      badge.hidden = false;
-      badge.style.display = 'inline-flex';
-      badge.style.alignItems = 'center';
-      badge.style.gap = '5px';
-    } catch (_) { /* Missing or inconsistent attestation => no badge. */ }
+      const locale = badge.getAttribute('data-github-attestation-badge') === 'ru' ? 'ru' : 'en';
+      badge.href = './sigstore-' + locale + '.html';
+      badge.classList.add('is-verified');
+      const label = badge.querySelector('.trust-badge-text');
+      if (label) label.textContent = locale === 'ru' ? 'Sigstore · Аттестация подтверждена' : 'Sigstore · Attestation verified';
+    } catch (_) { /* Keep neutral attestation-report link; no verified claim. */ }
   })();
 })();
