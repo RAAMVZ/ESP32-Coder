@@ -1,0 +1,28 @@
+{
+    "schema_version":  1,
+    "application":  "ESP32 Coder",
+    "version":  "1.1.12",
+    "release_tag":  "v1.1.12",
+    "audit_session_utc":  "2026-11-11T15:47:58Z",
+    "audit_session_id":  "f11eeff26f484155ad7120bc376b2bb7",
+    "filename":  "esp32coder.exe",
+    "sha256":  "d796583e548132e9bb0647ebb8b977f406db7441d5bed65f0195c8358f707c83",
+    "zip_filename":  "ESP32-Coder-1.1.12.zip",
+    "zip_sha256":  "c2f2be6d55f1da066080d2a804f55499323cfccd4e34bc3073f0a5c55f0d627f",
+    "windows_authenticode":  {
+                                 "verified":  false,
+                                 "status":  "not_signed",
+                                 "signer":  null
+                             },
+    "updater_ed25519_verified":  true,
+    "virustotal":  {
+                       "scan_utc":  "2026-11-11T15:53:02Z",
+                       "malicious":  0,
+                       "suspicious":  0,
+                       "completed_engines":  66,
+                       "total_engines":  75,
+                       "url":  "https://www.virustotal.com/gui/file/d796583e548132e9bb0647ebb8b977f406db7441d5bed65f0195c8358f707c83/detection",
+                       "disclaimer":  "No detections is not a guarantee of security."
+                   },
+    "github_release":  "https://github.com/RAAMVZ/ESP32-Coder/releases/tag/v1.1.12"
+}
