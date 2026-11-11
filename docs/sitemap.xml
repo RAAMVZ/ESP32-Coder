@@ -26,4 +26,6 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/docs-ru.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/docs-en.html"/>
   </url>
+  <url><loc>https://raamvz.github.io/ESP32-Coder/audit-ru.html</loc></url>
+  <url><loc>https://raamvz.github.io/ESP32-Coder/audit-en.html</loc></url>
 </urlset>
