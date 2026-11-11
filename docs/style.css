@@ -2362,16 +2362,21 @@ html.feed-page .hero-security-badges .trust-badge{
   min-width:0;
   min-height:49px;
   padding:7px 8px;
-  background:linear-gradient(160deg,#fff,#eefff7);
-  border:1px solid #9bdfc3;
+  background:#fff;
+  border:1px solid #b2c9c6;
   border-radius:12px;
-  box-shadow:0 4px 9px rgba(14,117,84,.12),inset 0 1px 0 rgba(255,255,255,.93);
-  color:#05663b;
+  box-shadow:0 4px 9px rgba(14,70,84,.08),inset 0 1px 0 rgba(255,255,255,.93);
+  color:#183d40;
   font-weight:800;
   line-height:1.2;
   font-size:clamp(11.5px,.88vw,13.5px);
   text-decoration:none;
   transition:background .16s,border-color .16s,box-shadow .16s,transform .16s;
+}
+html.feed-page .hero-security-badges .trust-badge.is-verified{
+  background:linear-gradient(160deg,#fff,#eefff7);
+  border-color:#9bdfc3;
+  color:#05663b;
 }
 html.feed-page .hero-security-badges .trust-badge[hidden]{display:none!important}
 html.feed-page .hero-security-badges .trust-badge:hover{
@@ -2395,9 +2400,11 @@ html.feed-page .trust-badge-text{
   overflow-wrap:break-word;
 }
 html.feed-page .trust-check{
+  display:none;
   flex:0 0 15px;
   color:#13a86d;
 }
+html.feed-page .trust-badge.is-verified .trust-check{display:block}
 @media (min-width:951px) and (max-width:1190px){
   html.feed-page .header-inner .brand{flex-basis:198px}
   html.feed-page .header-inner .brand img.brand-logo-full{width:min(198px,100%)}
@@ -2660,4 +2667,18 @@ html.feed-page .trust-check{
 .site-total-visits::-moz-selection{
   background:#1865a7;
   color:#ffffff;
+}
+
+/* v1.1.12: center the white ESP32 wordmark inside its dark logo plate.
+   The plate itself stays left-aligned in the site header. */
+.brand{align-items:center;justify-content:center;}
+.brand img.brand-logo-full{
+  display:block;box-sizing:border-box;
+  object-fit:contain;object-position:center center;
+  background:#090e13;
+  padding:7px 11px;
+  border-radius:10px;
+}
+@media(max-width:680px){
+  .brand img.brand-logo-full{padding:5px 8px;border-radius:8px;}
 }
