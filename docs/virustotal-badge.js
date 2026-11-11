@@ -31,12 +31,11 @@
       // VirusTotal's own interface language cannot be controlled by us.
       const locale = badge.getAttribute('data-virustotal-badge') === 'ru' ? 'ru' : 'en';
       badge.href = './security-' + locale + '.html';
-      badge.hidden = false;
-      badge.style.display = 'inline-flex';
-      badge.style.alignItems = 'center';
-      badge.style.gap = '5px';
+      badge.classList.add('is-verified');
+      const label = badge.querySelector('.trust-badge-text');
+      if (label) label.textContent = locale === 'ru' ? 'VirusTotal · 0 обнаружений' : 'VirusTotal · 0 detections';
     } catch (_) {
-      // No false-positive “0 detections” claim on network/JSON failures.
+      // Leave the neutral report link visible without claiming 0 detections.
     }
   })();
 })();
