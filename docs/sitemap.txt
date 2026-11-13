@@ -1,0 +1,11 @@
+https://raamvz.github.io/ESP32-Coder/
+https://raamvz.github.io/ESP32-Coder/ru.html
+https://raamvz.github.io/ESP32-Coder/en.html
+https://raamvz.github.io/ESP32-Coder/docs-ru.html
+https://raamvz.github.io/ESP32-Coder/docs-en.html
+https://raamvz.github.io/ESP32-Coder/audit-ru.html
+https://raamvz.github.io/ESP32-Coder/audit-en.html
+https://raamvz.github.io/ESP32-Coder/security-ru.html
+https://raamvz.github.io/ESP32-Coder/security-en.html
+https://raamvz.github.io/ESP32-Coder/sigstore-ru.html
+https://raamvz.github.io/ESP32-Coder/sigstore-en.html
