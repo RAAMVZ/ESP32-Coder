@@ -38,11 +38,11 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
       title:'ESP32 Coder — Безопасность загрузки', home:'Вернуться',
       description:'Здесь опубликованы результаты антивирусной проверки и контрольные суммы файлов. Ноль обнаружений не гарантирует безопасность.',
       loading:'Загрузка отчёта о проверке…', unavailable:'Отчёт о проверке недоступен', invalid:'Некорректный отчёт о проверке',
-      version:'Версия', exeHash:'EXE SHA-256', zipHash:'ZIP SHA-256',
+      version:'Версия', exeName:'Проверенный EXE', zipName:'Проверенный ZIP', exeHash:'EXE SHA-256', zipHash:'ZIP SHA-256', zipScan:'VirusTotal — ZIP', zipDate:'Дата проверки ZIP (UTC)', zipHashOnly:'ZIP — только контрольная сумма (VirusTotal не проводился)',
       detections:'VirusTotal', malicious:'вредоносных', suspicious:'подозрительных', engines:'проверено движками',
       scanDate:'Дата проверки (UTC)', sessionDate:'Общее время аудита (UTC)', windows:'Подпись Windows Authenticode', signed:'Действительна', unsigned:'Нет подписи Windows Authenticode',
       updater:'Подпись обновлений Ed25519', verified:'Проверена', notVerified:'Не проверена',
-      vtLink:'Открыть оригинальный отчёт VirusTotal', releaseLink:'Открыть релиз GitHub',
+      vtLink:'VirusTotal — EXE', zipVtLink:'VirusTotal — ZIP', releaseLink:'Открыть релиз GitHub',
       sigstore:'GitHub Artifact Attestations (Sigstore): файлы EXE и ZIP подтверждены',
       sigExplanation:'Подтверждаются файлы EXE и ZIP релиза, а не сборка на GitHub и не отсутствие вредоносного кода.',
       sigBundle:'Посмотреть Sigstore bundle'
@@ -75,12 +75,14 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
     try {
       const response=await fetch('./security/latest.json',{cache:'no-store'});
       if (!response.ok) throw new Error('HTTP '+response.status);
-      const x=await response.json(); const vt=x && x.virustotal;
+      const x=await response.json(); const vt=x && x.virustotal; const zipvt=x && x.virustotal_zip;
       if (!x || x.schema_version!==1 || !/^\d+\.\d+\.\d+$/.test(x.version || '') ||
           x.release_tag!=='v'+x.version || x.filename!=='esp32coder.exe' ||
           !sha.test(x.sha256 || '') || !sha.test(x.zip_sha256 || '') ||
           x.github_release!==releaseBase+x.release_tag || !vt ||
           vt.url!=='https://www.virustotal.com/gui/file/'+x.sha256+'/detection' ||
+          (vt.filename!==undefined&&vt.filename!==x.filename) ||
+          (vt.sha256!==undefined&&vt.sha256!==x.sha256) ||
           !Number.isInteger(vt.malicious) || !Number.isInteger(vt.suspicious) ||
           !Number.isInteger(vt.completed_engines) ||
           !Number.isFinite(Date.parse(vt.scan_utc)) ||
@@ -88,8 +90,19 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
           typeof x.updater_ed25519_verified!=='boolean') throw new Error(t.invalid);
       out.textContent='';
       addRow(out,t.version,x.version);
+      addRow(out,t.exeName,x.filename);
       addRow(out,t.exeHash,x.sha256,true);
+      addRow(out,zipvt?t.zipName:t.zipHashOnly,x.zip_filename || '—');
       addRow(out,t.zipHash,x.zip_sha256,true);
+      if (zipvt) {
+        if(zipvt.filename!==x.zip_filename || zipvt.sha256!==x.zip_sha256 ||
+           zipvt.url!=='https://www.virustotal.com/gui/file/'+x.zip_sha256+'/detection' ||
+           !Number.isFinite(Date.parse(zipvt.scan_utc)) ||
+           !Number.isInteger(zipvt.malicious) || !Number.isInteger(zipvt.suspicious) ||
+           !Number.isInteger(zipvt.completed_engines)) throw new Error(t.invalid);
+        addRow(out,t.zipScan,`${zipvt.malicious} ${t.malicious} / ${zipvt.suspicious} ${t.suspicious} / ${zipvt.completed_engines} ${t.engines}`);
+        addRow(out,t.zipDate,zipvt.scan_utc);
+      }
       addRow(out,t.detections,`${vt.malicious} ${t.malicious} / ${vt.suspicious} ${t.suspicious} / ${vt.completed_engines} ${t.engines}`);
       if (x.audit_session_utc) addRow(out,t.sessionDate,x.audit_session_utc);
       addRow(out,t.scanDate,vt.scan_utc);
@@ -98,6 +111,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
       addRow(out,t.updater,x.updater_ed25519_verified ? t.verified : t.notVerified);
       const links=byId('external-links'); links.textContent='';
       addLink(links,t.vtLink,vt.url);
+      if (zipvt) addLink(links,t.zipVtLink,zipvt.url);
       addLink(links,t.releaseLink,x.github_release);
       await showAttestation(x);
     } catch (error) { out.textContent=t.unavailable+': '+(error && error.message ? error.message : 'Unknown error'); }
