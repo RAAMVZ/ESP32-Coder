@@ -2703,3 +2703,16 @@ html body .faq-grid details.faq-flip-closing summary,
 html.feed-page body .faq-grid details.faq-flip-closing summary {
   animation: faq-ink-light .46s linear both !important;
 }
+
+/* v1.1.13 adaptive one-stage wheel navigation (RU / EN only).
+   Enabled by slide-navigation.js when all content fits; otherwise native scroll. */
+html.feed-page.feed-wheel-mode{
+  scroll-snap-type:none !important;
+  scroll-behavior:auto !important;
+  overscroll-behavior-y:contain;
+}
+html.feed-page.feed-wheel-mode main>.feed-stage{scroll-snap-align:none}
+html.feed-page.feed-native-scroll{scroll-snap-type:none !important;scroll-behavior:auto !important;}
+@media (max-width:1019px),(max-height:589px){
+ html.feed-page{scroll-snap-type:none !important}
+}
