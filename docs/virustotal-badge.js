@@ -12,6 +12,15 @@
       const response = await fetch('./security/latest.json', { cache: 'no-store' });
       if (!response.ok) return;
       const report = await response.json();
+      const current = window.ESP32_SITE_CONFIG && window.ESP32_SITE_CONFIG.publishedVersion;
+      // Historical v1.1.12 results must never give the current v1.1.13 badge a green state.
+      if (!/^v\d+\.\d+\.\d+$/.test(current || '') || report.release_tag !== current) return;
+      const cr = await fetch('./security/ai-latest.json', {cache:'no-store'});
+      if (cr.ok) {
+        const codex = await cr.json();
+        if (codex.schema_version === 2 && codex.provider === 'OpenAI Codex CLI' && codex.status === 'completed' &&
+            (codex.release_tag !== current || codex.exe_sha256 !== report.sha256 || codex.zip_sha256 !== report.zip_sha256)) return;
+      }
       const vt = report && report.virustotal;
       if (!vt || report.schema_version !== 1 ||
           !/^\d+\.\d+\.\d+$/.test(report.version || '') ||
