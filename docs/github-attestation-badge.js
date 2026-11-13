@@ -13,8 +13,8 @@
   (async () => {
     try {
       const [vr, ar] = await Promise.all([
-        fetch('./security/latest.json', {cache:'no-store'}),
-        fetch('./security/attestation.json', {cache:'no-store'})
+        fetch('./security/latest.json?cacheBust='+Date.now(), {cache:'no-store'}),
+        fetch('./security/attestation.json?cacheBust='+Date.now(), {cache:'no-store'})
       ]);
       if (!vr.ok || !ar.ok) return;
       const report = await vr.json();
@@ -22,7 +22,7 @@
       const current = window.ESP32_SITE_CONFIG && window.ESP32_SITE_CONFIG.publishedVersion;
       if (!/^v\d+\.\d+\.\d+$/.test(current || '') || report.release_tag !== current || proof.release_tag !== current) return;
       // A completed Codex report for this release must refer to the same bytes.
-      const cr = await fetch('./security/ai-latest.json', {cache:'no-store'});
+      const cr = await fetch('./security/ai-latest.json?cacheBust='+Date.now(), {cache:'no-store'});
       if (cr.ok) {
         const codex = await cr.json();
         if (codex.schema_version === 2 && codex.provider === 'OpenAI Codex CLI' && codex.status === 'completed' &&
