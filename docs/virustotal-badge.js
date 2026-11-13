@@ -9,13 +9,13 @@
   const repo = 'https://github.com/RAAMVZ/ESP32-Coder/releases/tag/';
   (async () => {
     try {
-      const response = await fetch('./security/latest.json', { cache: 'no-store' });
+      const response = await fetch('./security/latest.json?cacheBust='+Date.now(), { cache: 'no-store' });
       if (!response.ok) return;
       const report = await response.json();
       const current = window.ESP32_SITE_CONFIG && window.ESP32_SITE_CONFIG.publishedVersion;
       // Historical v1.1.12 results must never give the current v1.1.13 badge a green state.
       if (!/^v\d+\.\d+\.\d+$/.test(current || '') || report.release_tag !== current) return;
-      const cr = await fetch('./security/ai-latest.json', {cache:'no-store'});
+      const cr = await fetch('./security/ai-latest.json?cacheBust='+Date.now(), {cache:'no-store'});
       if (cr.ok) {
         const codex = await cr.json();
         if (codex.schema_version === 2 && codex.provider === 'OpenAI Codex CLI' && codex.status === 'completed' &&
