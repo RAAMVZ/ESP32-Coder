@@ -3,27 +3,28 @@
   "public_report": true,
   "audit_purpose": "first-party-malicious-behavior",
   "application": "ESP32 Coder",
-  "version": "1.1.12",
-  "provider": "Cloudflare Workers AI",
-  "model": "@cf/zai-org/glm-4.7-flash",
+  "version": "1.1.13",
+  "provider": "OpenAI Codex CLI",
+  "model": "Codex CLI default (ChatGPT account)",
   "status": "completed",
-  "audit_session_utc": "2026-11-11T15:47:58Z",
-  "scan_utc": "2026-11-11T15:53:22.544Z",
-  "release_tag": "v1.1.12",
-  "exe_sha256": "d796583e548132e9bb0647ebb8b977f406db7441d5bed65f0195c8358f707c83",
-  "zip_sha256": "c2f2be6d55f1da066080d2a804f55499323cfccd4e34bc3073f0a5c55f0d627f",
+  "audit_session_utc": "2026-11-13T08:40:23Z",
+  "scan_utc": "2026-11-13T09:50:04.122Z",
+  "release_tag": "v1.1.13",
+  "exe_sha256": "af9bec44c46fcf95a4988b6de90b1494c8d060fd29a26f1e4fdc1aaa19970b8c",
+  "zip_sha256": "5934c7d85fc901c5fdccf62f452bf0ad6dac08b3e91a64cd183b6637b5133d1f",
   "scope": "quick",
-  "coverage_status": "sampled-excerpts-only",
+  "coverage_status": "all-runtime-javascript-reviewed",
+  "coverage_method": "all-runtime-javascript-files",
   "coverage": {
-    "source_files": 53,
-    "reviewed_files": 8,
-    "reviewed_chunks": 8,
-    "planned_chunks": 8
+    "source_files": 39,
+    "reviewed_files": 39,
+    "reviewed_chunks": 25,
+    "planned_chunks": 25
   },
   "review": {
-    "screened_out_candidates": 5,
-    "second_pass_completed": 5,
-    "second_pass_planned": 5,
+    "screened_out_candidates": 0,
+    "second_pass_completed": 0,
+    "second_pass_planned": 0,
     "second_pass_limited": false,
     "confirmed": 0,
     "false_positive": 0,
@@ -73,5 +74,5 @@
     "public_key_sha256": "cca836c0c01e35fa692a6631dd4bb5c1e57271f1e10dff5149851b0f97a9ec53"
   },
   "signature_file": "ai-latest.json.sig",
-  "disclaimer": "This audit checks possible malicious actions initiated by ESP32 Coder itself, not exploitable security vulnerabilities. AI review of sampled source is not proof of clean runtime behavior."
+  "disclaimer": "All selected first-party runtime JavaScript source files were reviewed in full. This is static AI analysis, not proof of safe executable behavior or a malware-free binary."
 }
