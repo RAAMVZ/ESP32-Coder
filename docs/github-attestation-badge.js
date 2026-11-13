@@ -19,6 +19,15 @@
       if (!vr.ok || !ar.ok) return;
       const report = await vr.json();
       const proof = await ar.json();
+      const current = window.ESP32_SITE_CONFIG && window.ESP32_SITE_CONFIG.publishedVersion;
+      if (!/^v\d+\.\d+\.\d+$/.test(current || '') || report.release_tag !== current || proof.release_tag !== current) return;
+      // A completed Codex report for this release must refer to the same bytes.
+      const cr = await fetch('./security/ai-latest.json', {cache:'no-store'});
+      if (cr.ok) {
+        const codex = await cr.json();
+        if (codex.schema_version === 2 && codex.provider === 'OpenAI Codex CLI' && codex.status === 'completed' &&
+            (codex.release_tag !== current || codex.exe_sha256 !== report.sha256 || codex.zip_sha256 !== report.zip_sha256)) return;
+      }
       if (!report || !proof || report.schema_version !== 1 || proof.schema_version !== 1 ||
           proof.verified !== true ||
           !/^v\d+\.\d+\.\d+$/.test(report.release_tag || '') ||
