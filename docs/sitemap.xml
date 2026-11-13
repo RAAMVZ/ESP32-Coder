@@ -1,31 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://raamvz.github.io/ESP32-Coder/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raamvz.github.io/ESP32-Coder/" />
+  </url>
+  <url>
     <loc>https://raamvz.github.io/ESP32-Coder/ru.html</loc>
-    <lastmod>2026-11-05</lastmod>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/ru.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/en.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://raamvz.github.io/ESP32-Coder/en.html"/>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raamvz.github.io/ESP32-Coder/" />
   </url>
   <url>
     <loc>https://raamvz.github.io/ESP32-Coder/en.html</loc>
-    <lastmod>2026-11-05</lastmod>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/ru.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/en.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://raamvz.github.io/ESP32-Coder/en.html"/>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raamvz.github.io/ESP32-Coder/" />
   </url>
   <url>
     <loc>https://raamvz.github.io/ESP32-Coder/docs-ru.html</loc>
     <lastmod>2026-11-05</lastmod>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/docs-ru.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/docs-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/docs-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/docs-en.html" />
   </url>
   <url>
     <loc>https://raamvz.github.io/ESP32-Coder/docs-en.html</loc>
     <lastmod>2026-11-05</lastmod>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/docs-ru.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/docs-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/docs-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/docs-en.html" />
   </url>
-  <url><loc>https://raamvz.github.io/ESP32-Coder/audit-ru.html</loc></url>
-  <url><loc>https://raamvz.github.io/ESP32-Coder/audit-en.html</loc></url>
+  <url>
+    <loc>https://raamvz.github.io/ESP32-Coder/audit-ru.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/audit-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/audit-en.html" />
+  </url>
+  <url>
+    <loc>https://raamvz.github.io/ESP32-Coder/audit-en.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/audit-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/audit-en.html" />
+  </url>
+  <url>
+    <loc>https://raamvz.github.io/ESP32-Coder/security-ru.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/security-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/security-en.html" />
+  </url>
+  <url>
+    <loc>https://raamvz.github.io/ESP32-Coder/security-en.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/security-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/security-en.html" />
+  </url>
+  <url>
+    <loc>https://raamvz.github.io/ESP32-Coder/sigstore-ru.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/sigstore-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/sigstore-en.html" />
+  </url>
+  <url>
+    <loc>https://raamvz.github.io/ESP32-Coder/sigstore-en.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://raamvz.github.io/ESP32-Coder/sigstore-ru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://raamvz.github.io/ESP32-Coder/sigstore-en.html" />
+  </url>
 </urlset>
