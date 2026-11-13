@@ -29,7 +29,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
 <div id="external-links"></div>
 <div id="attestation" class="stat" hidden></div>
 </main>
-<script src="site-config.js"></script><script>
+<script src="site-config.js?v=v1.1.13"></script><script>
 (() => {
   'use strict';
   // This document has a fixed language. Query strings cannot switch languages.
@@ -73,7 +73,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
   async function showReport() {
     const out=byId('result');
     try {
-      const response=await fetch('./security/latest.json',{cache:'no-store'});
+      const response=await fetch('./security/latest.json?cacheBust='+Date.now(),{cache:'no-store'});
       if (!response.ok) throw new Error('HTTP '+response.status);
       const x=await response.json(); const vt=x && x.virustotal; const zipvt=x && x.virustotal_zip;
       const current = window.ESP32_SITE_CONFIG && window.ESP32_SITE_CONFIG.publishedVersion;
@@ -81,7 +81,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
         out.textContent='For the current release ' + current + ' the VirusTotal report is not yet published on this site; older results are not used.';
         return;
       }
-      const cr = await fetch('./security/ai-latest.json', {cache:'no-store'});
+      const cr = await fetch('./security/ai-latest.json?cacheBust='+Date.now(), {cache:'no-store'});
       if (cr.ok) {
         const codex = await cr.json();
         if (codex.schema_version === 2 && codex.provider === 'OpenAI Codex CLI' && codex.status === 'completed' &&
@@ -132,7 +132,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
   }
   async function showAttestation(report) {
     try {
-      const r=await fetch('./security/attestation.json',{cache:'no-store'});
+      const r=await fetch('./security/attestation.json?cacheBust='+Date.now(),{cache:'no-store'});
       if (!r.ok) return;
       const a=await r.json();
       if (!a || a.schema_version!==1 || a.verified!==true ||
