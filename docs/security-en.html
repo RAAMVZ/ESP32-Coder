@@ -29,7 +29,7 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
 <div id="external-links"></div>
 <div id="attestation" class="stat" hidden></div>
 </main>
-<script>
+<script src="site-config.js"></script><script>
 (() => {
   'use strict';
   // This document has a fixed language. Query strings cannot switch languages.
@@ -76,6 +76,20 @@ h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;margin:.4rem 0 1rem}p{line
       const response=await fetch('./security/latest.json',{cache:'no-store'});
       if (!response.ok) throw new Error('HTTP '+response.status);
       const x=await response.json(); const vt=x && x.virustotal; const zipvt=x && x.virustotal_zip;
+      const current = window.ESP32_SITE_CONFIG && window.ESP32_SITE_CONFIG.publishedVersion;
+      if (!/^v\d+\.\d+\.\d+$/.test(current || '') || x.release_tag !== current) {
+        out.textContent='For the current release ' + current + ' the VirusTotal report is not yet published on this site; older results are not used.';
+        return;
+      }
+      const cr = await fetch('./security/ai-latest.json', {cache:'no-store'});
+      if (cr.ok) {
+        const codex = await cr.json();
+        if (codex.schema_version === 2 && codex.provider === 'OpenAI Codex CLI' && codex.status === 'completed' &&
+            (codex.release_tag !== current || codex.exe_sha256 !== x.sha256 || codex.zip_sha256 !== x.zip_sha256)) {
+          out.textContent='For the current release ' + current + ' the VirusTotal report is not yet published on this site; older results are not used.';
+          return;
+        }
+      }
       if (!x || x.schema_version!==1 || !/^\d+\.\d+\.\d+$/.test(x.version || '') ||
           x.release_tag!=='v'+x.version || x.filename!=='esp32coder.exe' ||
           !sha.test(x.sha256 || '') || !sha.test(x.zip_sha256 || '') ||
