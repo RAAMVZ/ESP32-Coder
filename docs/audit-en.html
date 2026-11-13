@@ -24,7 +24,7 @@ function validPublic(d){
  return true;
 }
 async function load(){try{
- const response=await fetch('security/ai-latest.json',{cache:'no-store'});
+ const response=await fetch('security/ai-latest.json?cacheBust='+Date.now(),{cache:'no-store'});
  if(!response.ok){root.textContent=t.waiting;return;}
  const d=await response.json();
  if(!validPublic(d)){root.textContent=t.invalid;return;}
@@ -34,8 +34,8 @@ async function load(){try{
  let releaseMatched=false;
  try {
   const peers=await Promise.all([
-    fetch('security/latest.json',{cache:'no-store'}),
-    fetch('security/attestation.json',{cache:'no-store'})]);
+    fetch('security/latest.json?cacheBust='+Date.now(),{cache:'no-store'}),
+    fetch('security/attestation.json?cacheBust='+Date.now(),{cache:'no-store'})]);
   if(peers.every(r=>r.ok)){
    const [vt,sg]=await Promise.all(peers.map(r=>r.json()));
    releaseMatched=!!(vt&&sg&&vt.schema_version===1&&sg.schema_version===1&&sg.verified===true&&
@@ -57,8 +57,8 @@ async function load(){try{
  if(d.review.second_pass_limited)root.append(element('p',t.limited,'subtle'));
  row(t.confirmed,d.review.confirmed);row(t.false_positive,d.review.false_positive);row(t.needs_review,d.review.needs_review);
  root.append(element('p',t.disclaimer,'subtle'));
- const jsonLink=element('a',t.json);jsonLink.href='security/ai-latest.json';root.append(jsonLink);
- const signatureLink=element('a',t.signature);signatureLink.href='security/ai-latest.json.sig';
+ const jsonLink=element('a',t.json);jsonLink.href='security/ai-latest.json?cacheBust='+Date.now();root.append(jsonLink);
+ const signatureLink=element('a',t.signature);signatureLink.href='security/ai-latest.json.sig?cacheBust='+Date.now();
  root.append(element('p',''));root.append(signatureLink);
  const detailed=element('a',t.detailed);detailed.href='security/ai-detailed-en.html';root.append(element('p',''));root.append(detailed);
  entries.append(element('h2',t.five));
