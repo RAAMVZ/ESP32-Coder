@@ -22,32 +22,33 @@
 <style>
 :root{color-scheme:light;font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;color:#122326;background:#f5f9f8}*{box-sizing:border-box}body{margin:0}main{max-width:1010px;margin:0 auto;padding:clamp(25px,5vw,70px) 22px 60px}header{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.logo{width:min(245px,75vw);height:auto;display:block}.github{color:#006d68;text-decoration:none;border:1px solid #bddbd5;border-radius:10px;padding:10px 16px;font-weight:650;background:white}h1{font-size:clamp(2rem,4.5vw,3.4rem);letter-spacing:-.035em;line-height:1.12;margin:52px 0 16px}h2{font-size:clamp(1.25rem,2vw,1.45rem);margin:0 0 12px}.lead{max-width:790px;font-size:clamp(1.05rem,2vw,1.22rem);color:#334c4e;margin:0 0 30px}.languages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:32px 0}.lang{display:block;text-decoration:none;background:white;border:1px solid #bed8d4;border-radius:16px;padding:25px;color:inherit;box-shadow:0 8px 28px #06272208;transition:transform .15s,border-color .15s}.lang:hover,.lang:focus-visible{transform:translateY(-2px);border-color:#008c82;outline-offset:3px}.lang strong{font-size:1.27rem;display:block;margin-bottom:7px}.lang span{display:block;color:#3a595a}.go{display:inline-block;margin-top:16px;color:#007f74;font-weight:750}.features{border-top:1px solid #cedfdb;padding-top:28px;margin-top:38px}.features ul{padding-left:21px;columns:2;column-gap:40px}.features li{margin:7px 0;break-inside:avoid}footer{margin-top:45px;color:#465d5e;font-size:.92rem}footer a{color:#006d68}@media(max-width:640px){.languages{grid-template-columns:1fr}.features ul{columns:1}h1{margin-top:34px}}
 </style>
+<script>
+// Only the language-neutral entry point redirects. Direct ru.html/en.html URLs
+// remain stable and crawlable, regardless of visitor language.
+(function () {
+  var locale = '';
+  try {
+    locale = (navigator.languages && navigator.languages.length
+      ? navigator.languages[0]
+      : navigator.language || navigator.userLanguage || '').toLowerCase();
+  } catch (ignored) {}
+  var page = /^ru(?:-|$)/.test(locale) ? 'ru.html' : 'en.html';
+  var destination = new URL(page, window.location.href);
+  destination.hash = window.location.hash;
+  window.location.replace(destination.href);
+}());
+</script>
 </head>
 <body>
-<main>
-<header>
-  <a href="ru.html" aria-label="ESP32 Coder — русская версия"><img class="logo" src="assets/esp32coder-logo.png" width="245" alt="ESP32 Coder — IDE для ESP32"></a>
-  <a class="github" href="https://github.com/RAAMVZ/ESP32-Coder">GitHub / Releases</a>
-</header>
-<h1>ESP32 Coder — бесплатная IDE для ESP32 на Windows</h1>
-<p class="lead">Портативная среда разработки для ESP32: пишите код, собирайте и прошивайте проекты, импортируйте проекты Arduino IDE и PlatformIO. После установки необходимых компонентов основные функции работают офлайн.</p>
-<div class="languages" aria-label="Выберите язык / Choose language">
- <a class="lang" href="ru.html" lang="ru"><strong>Русская версия</strong><span>Описание возможностей, скриншоты, инструкция, загрузка и отчёты безопасности.</span><span class="go">Открыть сайт на русском →</span></a>
- <a class="lang" href="en.html" lang="en"><strong>English version</strong><span>Features, screenshots, documentation, downloads and security reports.</span><span class="go">Open the English website →</span></a>
-</div>
-<section class="features" aria-label="Возможности / Features">
-<h2>Возможности ESP32 Coder / Features</h2>
-<ul>
- <li>Редактор C/C++, компиляция и прошивка ESP32</li>
- <li>Импорт проектов Arduino IDE и PlatformIO</li>
- <li>Установка библиотек и компонентов</li>
- <li>Serial Monitor, Plotter и LittleFS</li>
- <li>Проверка обновлений и отчёты безопасности</li>
- <li>Offline development after component installation</li>
-</ul>
-<p><a href="docs-ru.html">Документация на русском</a> · <a href="docs-en.html">English documentation</a></p>
-</section>
-<footer>ESP32 Coder — бесплатное программное обеспечение для разработки под ESP32. <a href="https://github.com/RAAMVZ/ESP32-Coder/releases/latest">Последний релиз / Latest release</a>.</footer>
+<main style="max-width:46rem;margin:4rem auto;padding:0 1.5rem;font-family:system-ui,sans-serif;color:#122326">
+  <h1>ESP32 Coder</h1>
+  <p>Открывается сайт на языке браузера… / Opening the site in your browser language…</p>
+  <nav aria-label="Language links">
+    <a href="ru.html" lang="ru">Русская версия</a>
+    <span aria-hidden="true"> · </span>
+    <a href="en.html" lang="en">English version</a>
+  </nav>
+  <p><a href="https://github.com/RAAMVZ/ESP32-Coder">GitHub — ESP32 Coder</a></p>
 </main>
 </body>
 </html>
