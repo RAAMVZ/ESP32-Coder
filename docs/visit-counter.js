@@ -1,10 +1,11 @@
 /*
- * ESP32 Coder — discreet aggregate counter with 24-hour browser de-duplication.
+ * ESP32 Coder — separate RU and EN visit counters.
  *
- * The public CountAPI key is intentionally unchanged: the accumulated total
- * is shared by the RU/EN site and documentation and is not reset on upgrade.
+ * Each language uses its own public key and 24-hour browser de-duplication.
+ * The old shared counter key is left untouched; historical visits cannot be
+ * attributed to individual languages retroactively.
  * A successful live-site visit is counted at most once per 24-hour rolling
- * window in the same browser profile (localStorage, shared across tabs).
+ * window per language in the same browser profile (localStorage, across tabs).
  * This is an approximate count of unique browsers, NOT unique people or a
  * server-side bot filter. Visitors can clear storage or use another browser.
  * Local file previews never increment the published total.
@@ -15,11 +16,14 @@
   const element = document.getElementById('site-total-visits');
   if (!element) return;
 
+  const locale = element.getAttribute('data-counter-locale');
+  if (locale !== 'ru' && locale !== 'en') return;
+
   const endpoint = 'https://countapi.mileshilliard.com/api/v1/';
-  const publicKey = 'raamvz_esp32_coder_all_pages_v1';
-  const lastVisitKey = 'esp32-coder-last-visit-24h-v1';
-  const fallbackLockKey = 'esp32-coder-visit-lock-24h-v1';
-  const lockName = 'esp32-coder-visit-counter-24h-v1';
+  const publicKey = 'raamvz_esp32_coder_' + locale + '_v1';
+  const lastVisitKey = 'esp32-coder-last-visit-24h-' + locale + '-v2';
+  const fallbackLockKey = 'esp32-coder-visit-lock-24h-' + locale + '-v2';
+  const lockName = 'esp32-coder-visit-counter-24h-' + locale + '-v2';
   const periodMs = 24 * 60 * 60 * 1000;
   const liveSite = location.protocol === 'https:' &&
     location.hostname.toLowerCase() === 'raamvz.github.io';
@@ -27,9 +31,15 @@
   function display(value) {
     const number = Number(value);
     if (Number.isSafeInteger(number) && number >= 0) {
-      element.textContent = String(number);
+      element.textContent = locale.toUpperCase() + ': ' + number.toLocaleString(locale === 'ru' ? 'ru-RU' : 'en-US');
     }
   }
+
+  // Keep the small counter visible even if the remote service is unavailable.
+  element.textContent = locale.toUpperCase() + ': —';
+  element.title = locale === 'ru'
+    ? 'Посещения русской версии (один браузер — один визит за 24 часа)'
+    : 'English-version visits (one browser counted once per 24 hours)';
 
   function getStorage() {
     try {
@@ -144,6 +154,6 @@
 
   Promise.resolve(job).catch(function () {
     // A blocked/failed API must not disturb the website or leak any keys.
-    // Keep the counter blank if no reliable number was returned.
+    // Keep the placeholder instead of displaying a fabricated visit count.
   });
 }());
