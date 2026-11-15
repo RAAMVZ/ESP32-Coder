@@ -2636,12 +2636,12 @@ html.feed-page .trust-badge.is-verified .trust-check{display:block}
   .footer-links a{font-size:14px !important;}
 }
 
-/* Very discreet total visit count: bottom-right, white on white.
-   Only selecting the digits reveals them. No tooltip or framing. */
+/* Small visible counter, fixed at the bottom right of each language page.
+   RU/EN totals are independent. Keep it outside the slide scaling tree. */
 .site-total-visits{
   position:fixed;
-  right:3px;
-  bottom:2px;
+  right:8px;
+  bottom:6px;
   z-index:61;
   display:inline-block;
   width:auto;
@@ -2650,8 +2650,8 @@ html.feed-page .trust-badge.is-verified .trust-check{display:block}
   border:0;
   padding:0;
   margin:0;
-  font:400 11px/1.1 Arial,sans-serif;
-  letter-spacing:0;
+  font:500 11px/1.3 Arial,sans-serif;
+  letter-spacing:.01em;
   color:#ffffff !important;
   text-shadow:none;
   opacity:1;
