@@ -1,0 +1,17 @@
+{
+    "schema_version":  1,
+    "verified":  true,
+    "release_tag":  "v1.1.14",
+    "audit_session_utc":  "2026-11-16T18:35:13Z",
+    "audit_session_id":  "6bd4ec862d964b5283615e9e5a41f13b",
+    "verification_completed_utc":  "2026-11-16T18:49:40Z",
+    "filename":  "esp32coder.exe",
+    "sha256":  "2a112a6035afbdf5c8c016cf590184b490e210aed7506037672f5754622cabb6",
+    "zip_filename":  "ESP32-Coder-1.1.14.zip",
+    "zip_sha256":  "85380cd18cf6d9c0694763cc50b5d279cc1d71d2efe8e94abf149bc7ee506232",
+    "workflow":  "RAAMVZ/ESP32-Coder/.github/workflows/esp32-coder-release-attestation.yml",
+    "workflow_run_url":  "https://github.com/RAAMVZ/ESP32-Coder/actions/runs/43932669127",
+    "bundle_url":  "https://github.com/RAAMVZ/ESP32-Coder/releases/download/v1.1.14/ESP32-Coder-v1.1.14.sigstore.json",
+    "github_release":  "https://github.com/RAAMVZ/ESP32-Coder/releases/tag/v1.1.14",
+    "scope":  "Released EXE and ZIP file digests; not a GitHub source build or malware-free certification."
+}
