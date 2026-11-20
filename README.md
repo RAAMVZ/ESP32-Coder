@@ -16,7 +16,7 @@ No VS Code, no plugins, no VPN.
 **[⬇️ Download for Windows](https://github.com/RAAMVZ/ESP32-Coder/releases/latest)** ·
 **[🌐 Website](https://raamvz.github.io/ESP32-Coder/en.html)** ·
 **[📖 Docs](https://raamvz.github.io/ESP32-Coder/docs-en.html)** ·
-**[🇷🇺 Русская версия](https://raamvz.github.io/ESP32-Coder/)**
+
 
 <br>
 
